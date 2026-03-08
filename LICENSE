@@ -1,0 +1,104 @@
+PROPRIETARY SOFTWARE LICENSE
+
+Copyright (c) 2026 Rudrendu Paul and Sourav Nandy. All rights reserved.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+OWNERSHIP
+
+This software, including all source code, documentation, design assets,
+architecture decisions, AI prompt engineering, and associated materials
+(collectively, the "Software"), is the exclusive intellectual property of:
+
+    Rudrendu Paul
+    Sourav Nandy
+
+(collectively, the "Owners")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PERMITTED USE (No Approval Required)
+
+You are permitted, without prior written consent, to:
+
+  1. View and read this source code for personal learning and educational
+     purposes.
+  2. Fork this repository for private, non-commercial study or personal
+     portfolio reference.
+  3. Reference this project in academic, research, or portfolio contexts,
+     provided clear attribution is given to the Owners.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RESTRICTED USE (Prior Written Approval Required)
+
+The following uses are STRICTLY PROHIBITED without prior written approval
+from both Owners:
+
+  1. Commercial Use — using, deploying, selling, licensing, or distributing
+     this Software (or any derivative) as part of any commercial product,
+     SaaS offering, consulting engagement, or revenue-generating service.
+
+  2. Derivative Products — building a product or service that substantially
+     incorporates the architecture, AI prompt designs, workflows, or
+     business logic of this Software.
+
+  3. White-Labeling — rebranding or reselling this Software under any
+     other name or identity.
+
+  4. Internal Business Use — deploying this Software within an organization
+     for operational purposes, even without public distribution.
+
+  5. Sub-Licensing — granting rights to third parties that mirror or
+     exceed the rights granted in this License.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+HOW TO REQUEST APPROVAL
+
+To request commercial or derivative use approval, contact the Owners
+directly:
+
+    Rudrendu Paul   — via GitHub: https://github.com/RudrenduPaul
+    Sourav Nandy    — [contact to be added]
+
+Approval requests must describe:
+  (a) the intended use case,
+  (b) the commercial context (if applicable),
+  (c) the expected user base and scale.
+
+Both Owners must provide written approval before any restricted use begins.
+Approval for one use case does not constitute blanket approval for others.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ATTRIBUTION
+
+Any permitted use of this Software must include the following attribution
+in a clearly visible location (documentation, README, about page, or
+similar):
+
+    "Based on Podcast Guest CRM by Rudrendu Paul and Sourav Nandy.
+     https://github.com/RudrenduPaul/podcast-guest-crm"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DISCLAIMER OF WARRANTY
+
+THIS SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. THE OWNERS SHALL
+NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE
+USE OR INABILITY TO USE THIS SOFTWARE.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ENFORCEMENT
+
+Unauthorized commercial or derivative use of this Software constitutes
+copyright infringement under applicable intellectual property law and may
+result in legal action.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All rights not explicitly granted herein are reserved by the Owners.
