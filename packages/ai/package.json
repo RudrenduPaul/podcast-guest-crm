@@ -1,0 +1,14 @@
+{
+  "name": "@podcast-crm/ai",
+  "version": "0.1.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@podcast-crm/config": "workspace:*",
+    "@podcast-crm/types": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
