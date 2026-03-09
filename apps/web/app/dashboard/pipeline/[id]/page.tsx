@@ -23,6 +23,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { GuestAvatar } from '@/components/ui/avatar';
 import { AIAssistPanel } from '@/components/outreach/AIAssistPanel';
+import { InterviewBriefPanel } from '@/components/guests/InterviewBriefPanel';
+import { SocialPostsPanel } from '@/components/guests/SocialPostsPanel';
 import { useGuest } from '@/hooks/useGuests';
 import {
   STAGE_CONFIG,
@@ -379,15 +381,18 @@ export default function GuestDetailPage({ params }: GuestDetailPageProps) {
             </CardContent>
           </Card>
 
-          {/* AI Panel */}
-          {aiAction === 'outreach' && (
+          {/* AI Panels */}
+          {aiAction && (
             <motion.div
+              key={aiAction}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
             >
               <Card>
-                <CardContent className="pt-5 h-[450px] flex flex-col">
-                  <AIAssistPanel guest={guest} />
+                <CardContent className="pt-5 h-[500px] flex flex-col">
+                  {aiAction === 'outreach' && <AIAssistPanel guest={guest} />}
+                  {aiAction === 'brief' && <InterviewBriefPanel guest={guest} />}
+                  {aiAction === 'social' && <SocialPostsPanel guest={guest} />}
                 </CardContent>
               </Card>
             </motion.div>

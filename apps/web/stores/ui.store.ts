@@ -43,6 +43,14 @@ interface UIStore {
   // Guest detail drawer
   guestDrawerOpen: boolean;
   setGuestDrawerOpen: (open: boolean) => void;
+
+  // Command palette (⌘K)
+  commandPaletteOpen: boolean;
+  setCommandPaletteOpen: (open: boolean) => void;
+
+  // Add Guest modal
+  addGuestModalOpen: boolean;
+  setAddGuestModalOpen: (open: boolean) => void;
 }
 
 const defaultFilters: GuestFilters = {
@@ -89,6 +97,14 @@ export const useUIStore = create<UIStore>()(
       // Guest detail drawer
       guestDrawerOpen: false,
       setGuestDrawerOpen: (open) => set({ guestDrawerOpen: open }),
+
+      // Command palette
+      commandPaletteOpen: false,
+      setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open }),
+
+      // Add Guest modal
+      addGuestModalOpen: false,
+      setAddGuestModalOpen: (open) => set({ addGuestModalOpen: open }),
     }),
     {
       name: 'podcast-crm-ui',

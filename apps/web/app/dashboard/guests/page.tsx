@@ -22,7 +22,7 @@ const STAGE_FILTERS: { value: GuestLifecycleStage | ''; label: string }[] = [
 ];
 
 export default function GuestsPage() {
-  const { guestFilters, setGuestFilters } = useUIStore();
+  const { guestFilters, setGuestFilters, setAddGuestModalOpen } = useUIStore();
   const [search, setSearch] = useState(guestFilters.search);
 
   const { data, isLoading } = useGuests({
@@ -54,7 +54,7 @@ export default function GuestsPage() {
             {total} guest{total !== 1 ? 's' : ''} in your pipeline
           </p>
         </div>
-        <Button className="gap-2">
+        <Button className="gap-2" onClick={() => setAddGuestModalOpen(true)}>
           <Plus className="h-4 w-4" />
           Add Guest
         </Button>
