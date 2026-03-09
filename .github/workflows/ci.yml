@@ -47,8 +47,11 @@ jobs:
         run: pnpm build
         env:
           NODE_ENV: production
-          ANTHROPIC_API_KEY: sk-ant-mock-key-for-ci
-          JWT_SECRET: mock-jwt-secret-for-ci-environment-32chars
+          # Real secrets are injected from GitHub repository secrets (Settings → Secrets → Actions).
+          # If the secret is not set, the placeholder keeps CI green for open-source contributors
+          # while ensuring the app cannot run with real data without proper credentials.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || 'dev-placeholder-ci-build-only' }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET || 'dev-placeholder-jwt-secret-ci-build-only-32+chars' }}
           NEXT_PUBLIC_API_URL: http://localhost:3001
 
       - name: Upload build artifacts
