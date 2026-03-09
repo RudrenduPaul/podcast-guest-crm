@@ -1,15 +1,41 @@
-# Podcast Guest CRM
+<div align="center">
 
-![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178c6?logo=typescript&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js&logoColor=white)
-![Fastify](https://img.shields.io/badge/Fastify-4.26-white?logo=fastify&logoColor=black)
-![Claude AI](https://img.shields.io/badge/Claude-claude--sonnet--4--6-D97757?logo=anthropic&logoColor=white)
-![Turborepo](https://img.shields.io/badge/Turborepo-2.0-EF4444?logo=turborepo&logoColor=white)
-![License](https://img.shields.io/badge/License-Proprietary-slate)
+<h1>🎙️ Podcast Guest CRM</h1>
 
-> An AI-native CRM for podcast hosts and booking agencies. Tracks the full guest lifecycle — from discovery through post-episode follow-up — with Claude handling the work people dread most: cold outreach, interview prep, and social copy.
+<p><strong>AI-native guest lifecycle management for podcast hosts and booking agencies.</strong><br/>
+From discovery through post-episode follow-up — with Claude handling the work people dread most.</p>
 
-**Built by Rudrendu Paul & Sourav Nandy** · Developed with [Claude Code](https://claude.ai/code)
+<p>
+  <img src="https://img.shields.io/badge/TypeScript-5.4-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/Fastify-4.26-000000?style=for-the-badge&logo=fastify&logoColor=white" alt="Fastify"/>
+</p>
+<p>
+  <img src="https://img.shields.io/badge/Claude-claude--sonnet--4--6-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude AI"/>
+  <img src="https://img.shields.io/badge/Turborepo-2.0-EF4444?style=for-the-badge&logo=turborepo&logoColor=white" alt="Turborepo"/>
+  <img src="https://img.shields.io/badge/Drizzle_ORM-SQLite-C5F74F?style=for-the-badge&logo=drizzle&logoColor=black" alt="Drizzle ORM"/>
+</p>
+<p>
+  <img src="https://img.shields.io/badge/CI-passing-22c55e?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI"/>
+  <img src="https://img.shields.io/badge/CodeQL-enabled-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="CodeQL"/>
+  <img src="https://img.shields.io/badge/License-Proprietary-64748b?style=for-the-badge" alt="License"/>
+</p>
+
+<p>
+  <strong>Built by Rudrendu Paul & Sourav Nandy</strong> · Developed with <a href="https://claude.ai/code">Claude Code</a>
+</p>
+
+<p>
+  <a href="#the-problem">Problem</a> ·
+  <a href="#whats-built">Demo</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#ai-layer">AI Features</a> ·
+  <a href="#getting-started">Quick Start</a>
+</p>
+
+</div>
+
+---
 
 ---
 
