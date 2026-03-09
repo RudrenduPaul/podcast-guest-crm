@@ -277,7 +277,7 @@ Custom slash commands in `.claude/commands/`:
 
 ## MLP: The Craft Standard
 
-The "ship fast" advantage is gone. A capable developer scaffolds a CRM in a weekend; Claude Code compresses that to hours. The moat is now craft — the quality of what you build in that time.
+The "ship fast" advantage is gone. A capable developer scaffolds a CRM in a weekend; our solution compresses that to hours. The moat is now craft — the quality of what you build in that time.
 
 We hold a Minimum Lovable Product bar on every PR. Elena Verna's framing: the threshold where a product earns genuine affection from its users, not just adequate utility.
 
