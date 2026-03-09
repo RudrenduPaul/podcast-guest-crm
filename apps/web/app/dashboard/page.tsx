@@ -12,34 +12,44 @@ import {
   Clock,
   Star,
   Sparkles,
+  Plus,
+  CheckCircle2,
+  Mic2,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
+import { GuestAvatar } from '@/components/ui/avatar';
 import { useAnalyticsOverview } from '@/hooks/useAnalytics';
 import { useGuests } from '@/hooks/useGuests';
 import { formatRelativeDate, STAGE_CONFIG, getDaysInStage } from '@/lib/utils';
 import { seedWorkspace } from '@/lib/mock-data';
+import { useUIStore } from '@/stores/ui.store';
 import type { GuestLifecycleStage } from '@podcast-crm/types';
 
 const STAGE_ORDER: GuestLifecycleStage[] = [
-  'discover', 'outreach', 'scheduled', 'recorded', 'published', 'follow_up'
+  'discover',
+  'outreach',
+  'scheduled',
+  'recorded',
+  'published',
+  'follow_up',
 ];
 
 export default function DashboardPage() {
   const { data: analytics, isLoading } = useAnalyticsOverview();
-  const { data: guestsData } = useGuests({ stage: 'outreach', limit: 100 });
+  const { data: outreachData } = useGuests({ stage: 'outreach', limit: 100 });
+  const { data: scheduledData } = useGuests({ stage: 'scheduled', limit: 20 });
+  const { setAddGuestModalOpen } = useUIStore();
 
-  // Smart follow-up nudge: guests in outreach >7 days with no reply
+  // Smart follow-up nudge on first load
   useEffect(() => {
-    if (!guestsData?.data) return;
-    const staleGuests = guestsData.data.filter((g) => {
-      if (g.stage !== 'outreach') return false;
-      const daysInStage = getDaysInStage(g.updatedAt);
-      return daysInStage > 7;
-    });
+    if (!outreachData?.data) return;
+    const staleGuests = outreachData.data.filter(
+      (g) => g.stage === 'outreach' && getDaysInStage(g.updatedAt) > 7
+    );
     if (staleGuests.length > 0) {
       const names = staleGuests
         .slice(0, 2)
@@ -47,14 +57,22 @@ export default function DashboardPage() {
         .join(', ');
       const extra = staleGuests.length > 2 ? ` +${staleGuests.length - 2} more` : '';
       toast(`Follow-up nudge: ${names}${extra} haven't replied in 7+ days`, {
-        description: 'Consider sending a follow-up to keep the conversation warm.',
+        description: 'Consider sending a friendly bump to keep the conversation warm.',
         duration: 8000,
         icon: '💌',
       });
     }
-    // Only fire once on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [guestsData?.data?.length]);
+  }, [outreachData?.data?.length]);
+
+  const staleOutreach = (outreachData?.data ?? []).filter(
+    (g) => getDaysInStage(g.updatedAt) > 7
+  );
+  const upcomingRecordings = scheduledData?.data ?? [];
+  const todaysFocusItems = [
+    ...staleOutreach.map((g) => ({ ...g, focusReason: 'follow-up' as const })),
+    ...upcomingRecordings.map((g) => ({ ...g, focusReason: 'recording' as const })),
+  ].slice(0, 4);
 
   const stats = [
     {
@@ -97,17 +115,30 @@ export default function DashboardPage() {
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
+        className="flex items-center justify-between"
       >
-        <h1 className="text-2xl font-bold text-slate-900">
-          {(() => {
-            const h = new Date().getHours();
-            const greeting = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
-            return `${greeting}, Rudrendu 👋`;
-          })()}
-        </h1>
-        <p className="text-slate-500 mt-0.5">
-          {seedWorkspace.showName} · {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
-        </p>
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">
+            {(() => {
+              const h = new Date().getHours();
+              const greeting =
+                h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+              return `${greeting}, Rudrendu 👋`;
+            })()}
+          </h1>
+          <p className="text-slate-500 mt-0.5">
+            {seedWorkspace.showName} ·{' '}
+            {new Date().toLocaleDateString('en-US', {
+              weekday: 'long',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+        </div>
+        <Button onClick={() => setAddGuestModalOpen(true)} className="gap-2">
+          <Plus className="h-4 w-4" />
+          Add Guest
+        </Button>
       </motion.div>
 
       {/* Key metrics */}
@@ -125,7 +156,9 @@ export default function DashboardPage() {
                 <Card className="hover:shadow-md transition-shadow cursor-pointer group">
                   <CardContent className="pt-5 pb-4">
                     <div className="flex items-center justify-between mb-3">
-                      <div className={`h-8 w-8 rounded-lg ${stat.bg} flex items-center justify-center`}>
+                      <div
+                        className={`h-8 w-8 rounded-lg ${stat.bg} flex items-center justify-center`}
+                      >
                         <Icon className={`h-4 w-4 ${stat.color}`} />
                       </div>
                       <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-brand-500 transition-colors" />
@@ -170,22 +203,23 @@ export default function DashboardPage() {
                   const config = STAGE_CONFIG[stage];
                   const count = analytics?.byStage[stage] ?? 0;
                   return (
-                    <div
-                      key={stage}
-                      className={`rounded-lg p-3 border ${config.bgColor} ${config.borderColor}`}
-                    >
-                      <div className="flex items-center gap-1.5 mb-1">
-                        <div className={`h-1.5 w-1.5 rounded-full ${config.dotColor}`} />
-                        <span className={`text-[11px] font-semibold ${config.color}`}>
-                          {config.label}
-                        </span>
+                    <Link key={stage} href="/dashboard/pipeline">
+                      <div
+                        className={`rounded-lg p-3 border cursor-pointer hover:shadow-sm transition-shadow ${config.bgColor} ${config.borderColor}`}
+                      >
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <div className={`h-1.5 w-1.5 rounded-full ${config.dotColor}`} />
+                          <span className={`text-[11px] font-semibold ${config.color}`}>
+                            {config.label}
+                          </span>
+                        </div>
+                        {isLoading ? (
+                          <Skeleton className="h-6 w-8" />
+                        ) : (
+                          <p className="text-2xl font-bold text-slate-900">{count}</p>
+                        )}
                       </div>
-                      {isLoading ? (
-                        <Skeleton className="h-6 w-8" />
-                      ) : (
-                        <p className="text-2xl font-bold text-slate-900">{count}</p>
-                      )}
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -204,18 +238,20 @@ export default function DashboardPage() {
               <CardTitle className="text-base">Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <Link href="/dashboard/guests" className="block">
-                <button className="w-full flex items-center gap-3 rounded-lg border border-slate-200 p-3 text-left hover:bg-slate-50 transition-colors group">
-                  <div className="h-8 w-8 rounded-lg bg-brand-50 flex items-center justify-center">
-                    <Users className="h-4 w-4 text-brand-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-slate-900">Add Guest</p>
-                    <p className="text-xs text-slate-500">Start the pipeline</p>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-brand-500 ml-auto transition-colors" />
-                </button>
-              </Link>
+              <button
+                onClick={() => setAddGuestModalOpen(true)}
+                className="w-full flex items-center gap-3 rounded-lg border border-slate-200 p-3 text-left hover:bg-slate-50 transition-colors group"
+              >
+                <div className="h-8 w-8 rounded-lg bg-brand-50 flex items-center justify-center">
+                  <Plus className="h-4 w-4 text-brand-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-slate-900">Add Guest</p>
+                  <p className="text-xs text-slate-500">Start the pipeline</p>
+                </div>
+                <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-brand-500 ml-auto transition-colors" />
+              </button>
+
               <Link href="/dashboard/outreach" className="block">
                 <button className="w-full flex items-center gap-3 rounded-lg border border-slate-200 p-3 text-left hover:bg-slate-50 transition-colors group">
                   <div className="h-8 w-8 rounded-lg bg-violet-50 flex items-center justify-center">
@@ -228,6 +264,7 @@ export default function DashboardPage() {
                   <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-violet-500 ml-auto transition-colors" />
                 </button>
               </Link>
+
               <Link href="/dashboard/pipeline" className="block">
                 <button className="w-full flex items-center gap-3 rounded-lg border border-slate-200 p-3 text-left hover:bg-slate-50 transition-colors group">
                   <div className="h-8 w-8 rounded-lg bg-amber-50 flex items-center justify-center">
@@ -245,11 +282,90 @@ export default function DashboardPage() {
         </motion.div>
       </div>
 
-      {/* Recent activity */}
+      {/* Today's Focus */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
+      >
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base">Today&apos;s Focus</CardTitle>
+              {todaysFocusItems.length > 0 && (
+                <Badge variant="outline" className="text-[10px]">
+                  {todaysFocusItems.length} item{todaysFocusItems.length !== 1 ? 's' : ''}
+                </Badge>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            {todaysFocusItems.length === 0 ? (
+              <div className="flex items-center gap-3 rounded-lg bg-emerald-50 border border-emerald-100 px-4 py-3.5">
+                <div className="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-emerald-800">All caught up!</p>
+                  <p className="text-xs text-emerald-600 mt-0.5">
+                    No guests need immediate attention.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="divide-y divide-slate-50">
+                {todaysFocusItems.map((guest) => (
+                  <Link key={guest.id} href={`/dashboard/pipeline/${guest.id}`}>
+                    <div className="flex items-center gap-3 py-2.5 px-1 rounded-lg hover:bg-slate-50 transition-colors -mx-1 group cursor-pointer">
+                      <GuestAvatar name={guest.name} avatarUrl={guest.avatarUrl} size="sm" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-slate-900 truncate">
+                          {guest.name}
+                        </p>
+                        <p
+                          className={`text-xs mt-0.5 ${
+                            guest.focusReason === 'follow-up'
+                              ? 'text-amber-600'
+                              : 'text-blue-600'
+                          }`}
+                        >
+                          {guest.focusReason === 'follow-up' ? (
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {getDaysInStage(guest.updatedAt)} days without reply
+                            </span>
+                          ) : (
+                            <span className="flex items-center gap-1">
+                              <Mic2 className="h-3 w-3" />
+                              Scheduled — prep interview brief
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <Badge
+                        variant="outline"
+                        className={`text-[9px] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity ${
+                          guest.focusReason === 'follow-up'
+                            ? 'border-amber-200 text-amber-700'
+                            : 'border-blue-200 text-blue-700'
+                        }`}
+                      >
+                        {guest.focusReason === 'follow-up' ? 'Follow up' : 'Prep brief'}
+                      </Badge>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Recent activity */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.35 }}
       >
         <Card>
           <CardHeader className="pb-3">
@@ -272,10 +388,26 @@ export default function DashboardPage() {
               <div className="space-y-3">
                 {analytics?.recentActivity.slice(0, 6).map((activity) => {
                   const activityTypeConfig = {
-                    stage_change: { badge: 'Stage', color: 'secondary' as const, icon: Kanban },
-                    outreach_sent: { badge: 'Outreach', color: 'outline' as const, icon: Mail },
-                    reply_received: { badge: 'Reply', color: 'default' as const, icon: Mail },
-                    episode_published: { badge: 'Published', color: 'published' as const, icon: TrendingUp },
+                    stage_change: {
+                      badge: 'Stage',
+                      color: 'secondary' as const,
+                      icon: Kanban,
+                    },
+                    outreach_sent: {
+                      badge: 'Outreach',
+                      color: 'outline' as const,
+                      icon: Mail,
+                    },
+                    reply_received: {
+                      badge: 'Reply',
+                      color: 'default' as const,
+                      icon: Mail,
+                    },
+                    episode_published: {
+                      badge: 'Published',
+                      color: 'published' as const,
+                      icon: TrendingUp,
+                    },
                   }[activity.type];
 
                   const Icon = activityTypeConfig.icon;
