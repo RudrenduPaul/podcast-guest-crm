@@ -526,9 +526,6 @@ This isn't our first build at this quality level. The Podcast Guest CRM is one o
 - **Next.js 14 App Router frontends** with TanStack Query, Zustand, Framer Motion, and shadcn/ui
 - **Claude Code sub-agent architectures** that enforce domain boundaries at the tooling layer
 
-We treat every codebase as something that will be read, audited, and extended by a team — not just something that runs. That means architecture documents, ADRs, PR templates with MLP checklists, and CI pipelines that catch regressions before they ship.
-
-**We're pursuing accelerator opportunities (YC, Antler, Techstars, Sequoia Arc).** If you're evaluating this codebase or building in the podcast, creator economy, or AI-native SaaS space and want to talk, reach out.
 
 ---
 
