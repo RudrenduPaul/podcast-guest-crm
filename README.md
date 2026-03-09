@@ -96,7 +96,7 @@ docs: http://localhost:3001/docs   ← Swagger UI, auto-generated from route sch
 ```
 
 **Demo login** (pre-filled on the login page):
-- Email: `rudrendu@signalnoiseshow.com`
+- Email: `user@signalnoiseshow.com`
 - Password: `demo-password`
 
 To activate all six AI features live:
