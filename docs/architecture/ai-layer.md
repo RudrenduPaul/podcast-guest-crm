@@ -58,7 +58,7 @@ The AI layer (`packages/ai`) wraps the Anthropic Claude API and exposes six spec
 
 ## Structured Output Strategy
 
-Claude claude-sonnet-4-6 is instructed to return raw JSON (no markdown blocks) via an explicit system prompt instruction. The `completeJSON<T>()` method:
+claude-sonnet-4-6 is instructed to return raw JSON (no markdown blocks) via an explicit system prompt instruction. The `completeJSON<T>()` method:
 1. Appends JSON-only instruction to system prompt
 2. Strips any accidental markdown code fences
 3. Parses and returns as typed `T`

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpDown, ChevronRight } from 'lucide-react';
+import { ArrowUpDown, ChevronRight, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { GuestAvatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -112,6 +112,15 @@ export function GuestTable({ guests, isLoading, onStageChange }: GuestTableProps
 
       {/* Table rows */}
       <div className="divide-y divide-slate-100">
+        {sorted.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="h-10 w-10 rounded-full bg-slate-100 flex items-center justify-center mb-3">
+              <Users className="h-5 w-5 text-slate-400" />
+            </div>
+            <p className="text-sm font-medium text-slate-600">No guests match your filters</p>
+            <p className="text-xs text-slate-400 mt-1">Try adjusting your search or clearing filters.</p>
+          </div>
+        )}
         {sorted.map((guest, i) => {
           const stageConfig = STAGE_CONFIG[guest.stage];
           const priorityConfig = PRIORITY_CONFIG[guest.priority];

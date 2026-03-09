@@ -112,7 +112,7 @@ For the full architecture diagram and data flow documentation, see [`docs/archit
 
 ## AI Features
 
-All AI features use **Claude claude-sonnet-4-6** via `packages/ai`.
+All AI features use **claude-sonnet-4-6** via `packages/ai`.
 
 | Feature | Endpoint | Input | Output |
 |---------|----------|-------|--------|
@@ -153,7 +153,7 @@ podcast-guest-crm/
 │   ├── web/                    # Next.js 14 App Router
 │   │   ├── app/
 │   │   │   ├── (auth)/login/   # Demo-mode login page
-│   │   │   └── (dashboard)/    # Protected routes
+│   │   │   └── dashboard/      # Protected routes
 │   │   │       ├── page.tsx    # Dashboard overview
 │   │   │       ├── guests/     # Guest table + filters
 │   │   │       ├── pipeline/   # Kanban board + guest detail

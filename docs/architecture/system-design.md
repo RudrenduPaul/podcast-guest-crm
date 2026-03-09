@@ -2,7 +2,7 @@
 
 ## Overview
 
-Podcast Guest CRM is a full-stack monorepo application for managing the complete podcast guest lifecycle, from discovery through post-episode follow-up. The system is AI-native, using Claude claude-sonnet-4-6 for outreach drafting, guest fit scoring, interview prep, and social media automation.
+Podcast Guest CRM is a full-stack monorepo application for managing the complete podcast guest lifecycle, from discovery through post-episode follow-up. The system is AI-native, using claude-sonnet-4-6 for outreach drafting, guest fit scoring, interview prep, and social media automation.
 
 ## Architecture Diagram
 
@@ -13,7 +13,7 @@ Podcast Guest CRM is a full-stack monorepo application for managing the complete
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────────┐  │
 │  │   Kanban     │  │  AI Outreach │  │    Analytics Dashboard   │  │
 │  │   Pipeline   │  │   Composer   │  │    (Recharts)            │  │
-│  │  (DnD Kit)   │  │ (Streaming)  │  │                          │  │
+│  │ (@hello-pangea/dnd) │ (Streaming) │                          │  │
 │  └──────┬───────┘  └──────┬───────┘  └──────────┬───────────────┘  │
 │         │                 │                       │                  │
 │  ┌──────▼─────────────────▼───────────────────────▼──────────────┐  │

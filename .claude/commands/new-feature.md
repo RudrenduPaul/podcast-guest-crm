@@ -4,7 +4,7 @@ Scaffold a complete feature named $ARGUMENTS with:
 
 1. **API Route** in apps/api/src/routes/<name>.ts with Zod validation
 2. **Service** in apps/api/src/services/<name>.service.ts
-3. **Page** in apps/web/app/(dashboard)/<name>/page.tsx
+3. **Page** in apps/web/app/dashboard/<name>/page.tsx
 4. **Components** in apps/web/components/<name>/
 5. **TanStack Query hook** in apps/web/hooks/use<Name>.ts
 6. **Vitest test** for the API route service layer

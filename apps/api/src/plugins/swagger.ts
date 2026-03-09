@@ -39,7 +39,7 @@ export async function registerSwagger(server: FastifyInstance): Promise<void> {
         { name: 'Health', description: 'Health check endpoints' },
         { name: 'Guests', description: 'Guest management and lifecycle transitions' },
         { name: 'Outreach', description: 'AI-powered outreach email management' },
-        { name: 'AI', description: 'AI feature endpoints (Claude claude-sonnet-4-6)' },
+        { name: 'AI', description: 'AI feature endpoints (claude-sonnet-4-6)' },
         { name: 'Analytics', description: 'Pipeline and performance analytics' },
       ],
     },

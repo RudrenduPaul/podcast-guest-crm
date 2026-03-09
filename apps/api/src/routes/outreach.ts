@@ -41,7 +41,7 @@ export async function outreachRoutes(server: FastifyInstance): Promise<void> {
       schema: {
         tags: ['Outreach'],
         summary: 'Generate AI outreach email draft',
-        description: 'Uses Claude claude-sonnet-4-6 to draft a personalized outreach email for a guest.',
+        description: 'Uses claude-sonnet-4-6 to draft a personalized outreach email for a guest.',
         body: {
           type: 'object',
           required: ['guestId'],

@@ -125,7 +125,7 @@ To reset to seed data in tests: `guestService.reset()`.
 | AI prompts | `packages/ai/src/prompts/` |
 | API routes | `apps/api/src/routes/` |
 | Services | `apps/api/src/services/` |
-| Pages | `apps/web/app/(dashboard)/` |
+| Pages | `apps/web/app/dashboard/` |
 | Components | `apps/web/components/` |
 | Hooks | `apps/web/hooks/` |
 | Stores | `apps/web/stores/` |

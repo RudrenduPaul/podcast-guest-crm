@@ -111,7 +111,7 @@ export default function SettingsPage() {
             <div className="flex justify-between items-center py-2 border-b border-slate-100">
               <div>
                 <p className="text-sm font-medium text-slate-900">AI Model</p>
-                <p className="text-xs text-slate-500">Claude claude-sonnet-4-6 by Anthropic</p>
+                <p className="text-xs text-slate-500">claude-sonnet-4-6 by Anthropic</p>
               </div>
               <Badge variant="secondary">Active</Badge>
             </div>

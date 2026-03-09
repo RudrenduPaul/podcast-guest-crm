@@ -99,7 +99,11 @@ export default function DashboardPage() {
         animate={{ opacity: 1, y: 0 }}
       >
         <h1 className="text-2xl font-bold text-slate-900">
-          Good morning, Rudrendu 👋
+          {(() => {
+            const h = new Date().getHours();
+            const greeting = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+            return `${greeting}, Rudrendu 👋`;
+          })()}
         </h1>
         <p className="text-slate-500 mt-0.5">
           {seedWorkspace.showName} · {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
