@@ -100,14 +100,14 @@ Every guest moves through this lifecycle. Every transition is validated, logged,
 |---------|-------------|
 | **⌘K Command Palette** | Search any guest by name, company, or topic. Navigate all six pages. Trigger actions. Entirely keyboard-driven — the fastest path to anything in the app. |
 | **Kanban Pipeline** | Six-column drag-and-drop board. Optimistic updates. Lifecycle rules enforced at the service layer — you can't jump from Discover to Published. Confetti fires on every confirmed booking. |
-| **AI Email Composer** | Select a guest, click Generate. Claude streams a personalized 150–250 word pitch, character by character. Typewriter effect, not a spinner. Confidence score included. |
+| **AI Email Composer** | Select a guest, click Generate. Our AI streams a personalized 150–250 word pitch, character by character. Typewriter effect, not a spinner. Confidence score included. |
 | **Interview Brief** | One-click pre-recording brief: bio intro, 5 tailored question types, talking points, closing hook. Copy-ready. |
 | **Social Posts** | LinkedIn post, Twitter/X thread (5 tweets with character counts), Instagram caption. Platform tabs, one-click copy per platform. |
 | **Notification Center** | Persistent bell dropdown. Shows guests without reply in 7+ days and upcoming recordings. Always visible. Always actionable. |
 | **Today's Focus** | Dashboard section that surfaces exactly what needs attention today — no manual triage required. |
 | **Guest Detail** | Animated fit score ring (counts from 0), lifecycle progress timeline, full contact links, AI action sidebar with three generative panels. |
 | **Analytics** | Bar chart by stage, donut by topic, 12-week outreach activity timeline, conversion metrics. Runs without backend dependency. |
-| **Add Guest Modal** | ⌘N from anywhere. Name, email, title, company, bio, topics, LinkedIn, Twitter, stage, priority. Claude auto-scores fit on create. |
+| **Add Guest Modal** | ⌘N from anywhere. Name, email, title, company, bio, topics, LinkedIn, Twitter, stage, priority. Fit score auto-generated on create. |
 | **Smart Nudges** | Toast appears on dashboard load when guests have been in outreach > 7 days without reply. Proactive, named, not nagging. |
 
 ### Keyboard Shortcuts
@@ -284,7 +284,7 @@ We hold a Minimum Lovable Product bar on every PR. Elena Verna's framing: the th
 **Deliberately built moments:**
 
 - **Confetti on booking.** When a guest moves to Scheduled, confetti fires. A confirmed booking is a real win. The app should treat it that way.
-- **Typewriter effect on AI output.** Claude's email types out character by character. Streaming makes it feel like working *with* a collaborator, not waiting *for* a tool.
+- **Typewriter effect on AI output.** The generated email types out character by character. Streaming makes it feel like working *with* a collaborator, not waiting *for* a tool.
 - **Fit score counts up.** The ring animates from 0 to the actual score over 600ms. People watch it. That wait makes the score feel earned.
 - **Command palette.** ⌘K puts every guest, page, and action one keypress away. Power users never reach for the mouse.
 - **Today's Focus.** The dashboard tells you exactly who needs attention today — stale outreach, upcoming recordings — without requiring you to remember what to check.
@@ -522,7 +522,7 @@ This isn't our first build at this quality level. The Podcast Guest CRM is one o
 
 - **Full-stack TypeScript monorepos** (Turborepo + pnpm) with shared type packages, enforced at the CI layer
 - **Fastify APIs** with Zod-validated schemas, JWT authentication, and Row Level Security — no exceptions
-- **Claude-powered AI layers** with typed prompt modules, streaming, JSON extraction, and exponential backoff
+- **AI-powered feature layers** with typed prompt modules, streaming, JSON extraction, and exponential backoff
 - **Next.js 14 App Router frontends** with TanStack Query, Zustand, Framer Motion, and shadcn/ui
 - **Claude Code sub-agent architectures** that enforce domain boundaries at the tooling layer
 
