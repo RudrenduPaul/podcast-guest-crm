@@ -348,7 +348,7 @@ Every integration point sits behind an interface. MCP servers slot in without re
 | MCP Server | Status | Integration point |
 |-----------|--------|-------------------|
 | GitHub MCP | Active in dev | `.github/` — PR automation, CI status, issue tracking from the terminal |
-| Supabase MCP | Ready to wire | `packages/db/` — Claude queries live schema before writing queries, eliminating field-name bugs |
+| Supabase MCP | Ready to wire | `packages/db/` — our solution queries live schema before writing queries, eliminating field-name bugs |
 | Gmail MCP | Ready to wire | `apps/api/src/routes/outreach.ts` — outreach sending is behind a `sendEmail()` interface |
 | Google Calendar MCP | Ready to wire | `apps/api/src/routes/guests.ts` — booking confirmation and recording date sync |
 | Exa Search MCP | Ready to wire | `packages/ai/src/prompts/guest-research.ts` — live web data in the fit-scoring pipeline |
