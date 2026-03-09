@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Droppable } from '@hello-pangea/dnd';
 import { Users } from 'lucide-react';
 import { GuestCard } from '@/components/guests/GuestCard';

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import {
   Users,
   Kanban,
@@ -12,13 +13,14 @@ import {
   Star,
   Sparkles,
 } from 'lucide-react';
+import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-import { GuestAvatar } from '@/components/ui/avatar';
 import { useAnalyticsOverview } from '@/hooks/useAnalytics';
-import { formatRelativeDate, STAGE_CONFIG } from '@/lib/utils';
+import { useGuests } from '@/hooks/useGuests';
+import { formatRelativeDate, STAGE_CONFIG, getDaysInStage } from '@/lib/utils';
 import { seedWorkspace } from '@/lib/mock-data';
 import type { GuestLifecycleStage } from '@podcast-crm/types';
 
@@ -28,6 +30,31 @@ const STAGE_ORDER: GuestLifecycleStage[] = [
 
 export default function DashboardPage() {
   const { data: analytics, isLoading } = useAnalyticsOverview();
+  const { data: guestsData } = useGuests({ stage: 'outreach', limit: 100 });
+
+  // Smart follow-up nudge: guests in outreach >7 days with no reply
+  useEffect(() => {
+    if (!guestsData?.data) return;
+    const staleGuests = guestsData.data.filter((g) => {
+      if (g.stage !== 'outreach') return false;
+      const daysInStage = getDaysInStage(g.updatedAt);
+      return daysInStage > 7;
+    });
+    if (staleGuests.length > 0) {
+      const names = staleGuests
+        .slice(0, 2)
+        .map((g) => g.name.split(' ')[0])
+        .join(', ');
+      const extra = staleGuests.length > 2 ? ` +${staleGuests.length - 2} more` : '';
+      toast(`Follow-up nudge: ${names}${extra} haven't replied in 7+ days`, {
+        description: 'Consider sending a follow-up to keep the conversation warm.',
+        duration: 8000,
+        icon: '💌',
+      });
+    }
+    // Only fire once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [guestsData?.data?.length]);
 
   const stats = [
     {

@@ -37,24 +37,14 @@ export function usePipeline() {
   const stageTransitionMutation = useMutation({
     mutationFn: ({ id, stage }: { id: string; stage: GuestLifecycleStage }) =>
       api.guests.transitionStage(id, stage),
-    onSuccess: (result) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['pipeline'] });
       queryClient.invalidateQueries({ queryKey: ['guests'] });
-
-      // Fire confetti when a guest is scheduled!
-      if (result.data.stage === 'scheduled') {
-        void confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#6366f1', '#8b5cf6', '#10b981'],
-        });
-        toast.success(`${result.data.name} is booked! 🎉`, {
-          description: 'Time to prepare the interview brief.',
-        });
-      }
+      // Confetti and toast are fired optimistically in handleDragEnd for immediate feedback
     },
     onError: (error) => {
+      // Roll back the optimistic update
+      queryClient.invalidateQueries({ queryKey: ['pipeline', 'byStage'] });
       toast.error('Could not move guest', { description: error.message });
     },
   });
@@ -64,6 +54,7 @@ export function usePipeline() {
       if (newStage === oldStage) return;
 
       // Optimistic update for immediate UI feedback
+      let guestName = '';
       queryClient.setQueryData<Record<GuestLifecycleStage, Guest[]>>(
         ['pipeline', 'byStage'],
         (current) => {
@@ -71,6 +62,7 @@ export function usePipeline() {
 
           const guest = current[oldStage]?.find((g) => g.id === guestId);
           if (!guest) return current;
+          guestName = guest.name;
 
           return {
             ...current,
@@ -79,6 +71,19 @@ export function usePipeline() {
           };
         }
       );
+
+      // Fire confetti immediately on optimistic update when moving to scheduled
+      if (newStage === 'scheduled') {
+        void confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#6366f1', '#8b5cf6', '#10b981', '#f59e0b'],
+        });
+        toast.success(`${guestName || 'Guest'} is booked! 🎉`, {
+          description: 'Time to prepare the interview brief.',
+        });
+      }
 
       stageTransitionMutation.mutate({ id: guestId, stage: newStage });
     },

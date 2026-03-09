@@ -2,11 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpDown, ExternalLink, ChevronRight } from 'lucide-react';
+import { ArrowUpDown, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { GuestAvatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   cn,

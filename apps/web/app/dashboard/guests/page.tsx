@@ -2,15 +2,14 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Filter, Plus, SlidersHorizontal } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GuestTable } from '@/components/guests/GuestTable';
-import { Badge } from '@/components/ui/badge';
 import { useGuests } from '@/hooks/useGuests';
 import { useUIStore } from '@/stores/ui.store';
 import { cn } from '@/lib/utils';
-import type { GuestLifecycleStage, GuestPriority } from '@podcast-crm/types';
+import type { GuestLifecycleStage } from '@podcast-crm/types';
 
 const STAGE_FILTERS: { value: GuestLifecycleStage | ''; label: string }[] = [
   { value: '', label: 'All Stages' },
