@@ -2,40 +2,54 @@
 
 <h1>🎙️ Podcast Guest CRM</h1>
 
-<p><strong>AI-native guest lifecycle management for podcast hosts and booking agencies.</strong><br/>
-From discovery through post-episode follow-up — with Claude handling the work people dread most.</p>
+<p><em>AI-native guest lifecycle management for podcast hosts and booking agencies.<br/>
+From discovery through post-episode follow-up — with Claude handling the work people dread most.</em></p>
 
+<!-- Activity -->
+<p>
+  <img src="https://img.shields.io/github/last-commit/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=last%20commit" alt="Last Commit"/>
+  <img src="https://img.shields.io/github/commit-activity/m/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=commits%2Fmonth" alt="Commit Activity"/>
+  <img src="https://img.shields.io/badge/PRs-welcome-22c55e?style=flat-square" alt="PRs Welcome"/>
+</p>
+
+<!-- Stack -->
 <p>
   <img src="https://img.shields.io/badge/TypeScript-5.4-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
-  <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
   <img src="https://img.shields.io/badge/Fastify-4.26-000000?style=for-the-badge&logo=fastify&logoColor=white" alt="Fastify"/>
+  <img src="https://img.shields.io/badge/pnpm-monorepo-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm"/>
 </p>
+
+<!-- AI & Data -->
 <p>
   <img src="https://img.shields.io/badge/Claude-claude--sonnet--4--6-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude AI"/>
-  <img src="https://img.shields.io/badge/Turborepo-2.0-EF4444?style=for-the-badge&logo=turborepo&logoColor=white" alt="Turborepo"/>
-  <img src="https://img.shields.io/badge/Drizzle_ORM-SQLite-C5F74F?style=for-the-badge&logo=drizzle&logoColor=black" alt="Drizzle ORM"/>
+  <img src="https://img.shields.io/badge/Drizzle_ORM-SQLite%20%2F%20Turso-C5F74F?style=for-the-badge&logoColor=black" alt="Drizzle ORM"/>
+  <img src="https://img.shields.io/badge/Zod-validation-3068B7?style=for-the-badge&logo=zod&logoColor=white" alt="Zod"/>
 </p>
+
+<!-- CI & Security -->
 <p>
-  <img src="https://img.shields.io/badge/CI-passing-22c55e?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI"/>
+  <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI"/>
   <img src="https://img.shields.io/badge/CodeQL-enabled-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="CodeQL"/>
   <img src="https://img.shields.io/badge/License-Proprietary-64748b?style=for-the-badge" alt="License"/>
 </p>
 
+<br/>
+
 <p>
-  <strong>Built by Rudrendu Paul & Sourav Nandy</strong> · Developed with <a href="https://claude.ai/code">Claude Code</a>
+  Built by <strong>Rudrendu Paul</strong> &amp; <strong>Sourav Nandy</strong> &nbsp;·&nbsp; Developed with <a href="https://claude.ai/code"><strong>Claude Code</strong></a>
 </p>
 
 <p>
-  <a href="#the-problem">Problem</a> ·
-  <a href="#whats-built">Demo</a> ·
-  <a href="#architecture">Architecture</a> ·
-  <a href="#ai-layer">AI Features</a> ·
+  <a href="#the-problem">Problem</a> &nbsp;·&nbsp;
+  <a href="#whats-built">What's Built</a> &nbsp;·&nbsp;
+  <a href="#architecture">Architecture</a> &nbsp;·&nbsp;
+  <a href="#ai-layer">AI Features</a> &nbsp;·&nbsp;
+  <a href="#claude-code-sub-agents">Sub-Agents</a> &nbsp;·&nbsp;
   <a href="#getting-started">Quick Start</a>
 </p>
 
 </div>
-
----
 
 ---
 
