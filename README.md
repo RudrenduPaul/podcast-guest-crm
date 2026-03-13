@@ -503,9 +503,9 @@ Longer-term:
 
 ## The Team
 
-**Rudrendu Paul** and **Sourav Nandy** are senior engineers who build production AI-native software across multiple verticals using the same architecture, the same quality bar, and the same sub-agent development approach demonstrated in this codebase.
+**Rudrendu Paul** and **Sourav Nandy** have built this production-ready AI-native software.
 
-This isn't our first build at this quality level. The Podcast Guest CRM is one of several production-grade AI-native products we've shipped using this stack:
+The stack used:
 
 - **Full-stack TypeScript monorepos** (Turborepo + pnpm) with shared type packages, enforced at the CI layer
 - **Fastify APIs** with Zod-validated schemas, JWT authentication, and Row Level Security — no exceptions
