@@ -98,7 +98,7 @@ Every guest moves through this lifecycle. Every transition is validated, logged,
 
 | Feature | What it does |
 |---------|-------------|
-| **Cmd+K Command Palette** | Search any guest by name, company, or topic. Navigate all six pages. Trigger actions. Entirely keyboard-driven — the fastest path to anything in the app. |
+| **Cmd+K Palette** | Search any guest by name, company, or topic. Navigate all six pages. Trigger actions. Entirely keyboard-driven — the fastest path to anything in the app. |
 | **Kanban Pipeline** | Six-column drag-and-drop board. Optimistic updates. Lifecycle rules enforced at the service layer — you can't jump from Discover to Published. Confetti fires on every confirmed booking. |
 | **AI Email Composer** | Select a guest, click Generate. Our AI streams a personalized 150–250 word pitch, character by character. Typewriter effect, not a spinner. Confidence score included. |
 | **Interview Brief** | One-click pre-recording brief: bio intro, 5 tailored question types, talking points, closing hook. Copy-ready. |
