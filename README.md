@@ -107,7 +107,7 @@ Every guest moves through this lifecycle. Every transition is validated, logged,
 | **Today's Focus** | Dashboard section that surfaces exactly what needs attention today — no manual triage required. |
 | **Guest Detail** | Animated fit score ring (counts from 0), lifecycle progress timeline, full contact links, AI action sidebar with three generative panels. |
 | **Analytics** | Bar chart by stage, donut by topic, 12-week outreach activity timeline, conversion metrics. Runs without backend dependency. |
-| **Add Guest Modal** | ⌘N from anywhere. Name, email, title, company, bio, topics, LinkedIn, Twitter, stage, priority. Fit score auto-generated on create. |
+| **Add Guest Modal** | Cmd+N from anywhere. Name, email, title, company, bio, topics, LinkedIn, Twitter, stage, priority. Fit score auto-generated on create. |
 | **Smart Nudges** | Toast appears on dashboard load when guests have been in outreach > 7 days without reply. Proactive, named, not nagging. |
 
 ### Keyboard Shortcuts
