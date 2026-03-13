@@ -44,7 +44,7 @@
 
 <br/>
 
-Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **Sourav Nandy** &nbsp;·&nbsp; Engineered with [**Claude Code**](https://claude.ai/code)
+Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **[Sourav Nandy](https://github.com/essen-code)** &nbsp;·&nbsp; Engineered with [**Claude Code**](https://claude.ai/code)
 
 <br/>
 
