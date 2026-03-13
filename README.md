@@ -141,19 +141,6 @@ api:  http://localhost:3001
 docs: http://localhost:3001/docs   ← Swagger UI, auto-generated from route schemas
 ```
 
-**Demo login** (pre-filled):
-- Email: `user@signalnoiseshow.com`
-- Password: `demo-password`
-
-To activate live AI features:
-```bash
-echo "ANTHROPIC_API_KEY=sk-ant-..." > apps/api/.env.local
-```
-
-Without a key, every AI call returns realistic mock output. The full UI is evaluable without burning API credits.
-
----
-
 ## AI Layer
 
 All AI lives in `packages/ai`. The only place in the codebase that imports `@anthropic-ai/sdk`. Every feature calls a typed function — it never touches the SDK directly.
