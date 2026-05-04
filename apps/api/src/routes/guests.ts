@@ -1,7 +1,13 @@
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { guestService } from '../services/guest.service';
+import { aiService } from '../services/ai.service';
 import { validateRequest, paginationSchema, idParamSchema } from '../middleware/validate';
+
+const SHOW_CONTEXT = {
+  topics: ['AI', 'machine learning', 'startups', 'engineering', 'venture capital'],
+  audienceDescription: '40,000 technical founders, engineers, and investors',
+};
 
 const createGuestSchema = z.object({
   name: z.string().min(1).max(200),
@@ -172,6 +178,19 @@ export async function guestRoutes(server: FastifyInstance): Promise<void> {
       const guest = guestService.create({
         workspaceId: request.user.workspaceId,
         ...validated.body,
+      });
+
+      // Fire-and-forget: score fit in background so creation returns immediately
+      setImmediate(async () => {
+        try {
+          const research = await aiService.scoreFit(guest, SHOW_CONTEXT);
+          guestService.update(guest.id, request.user.workspaceId, {
+            fitScore: research.fitScore,
+            topics: research.topTopics.length > 0 ? research.topTopics : guest.topics,
+          });
+        } catch {
+          // Non-blocking — guest creation succeeds regardless of AI availability
+        }
       });
 
       return reply.status(201).send({ data: guest });
