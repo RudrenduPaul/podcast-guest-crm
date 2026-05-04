@@ -59,8 +59,36 @@ export function SocialPostsPanel({ guest }: SocialPostsPanelProps) {
   const handleGenerate = async () => {
     setState('generating');
     setPosts(null);
-    await new Promise((r) => setTimeout(r, 1600));
-    setPosts(generateMockPosts(guest));
+
+    try {
+      const defaultInsights = guest.topics.slice(0, 3).map(
+        (t) => `How ${t} is reshaping the way companies build and compete`
+      );
+      if (defaultInsights.length === 0) {
+        defaultInsights.push(`Key insights from ${guest.name}'s work at ${guest.company}`);
+      }
+
+      const { api } = await import('@/lib/api');
+      const result = await api.ai.getSocialPosts(guest.id, defaultInsights, {
+        episodeTitle: guest.episodeTitle ?? `Episode with ${guest.name}`,
+        episodeNumber: guest.episodeNumber ?? undefined,
+        podcastUrl: guest.podcastUrl ?? undefined,
+      }) as { data: { linkedin: { post: string; hashtags: string[] }; twitter: { thread: string[] }; instagramCaption: string } };
+
+      setPosts({
+        linkedin: result.data.linkedin.post +
+          (result.data.linkedin.hashtags.length > 0
+            ? '\n\n' + result.data.linkedin.hashtags.map((h) => `#${h}`).join(' ')
+            : ''),
+        twitter: result.data.twitter.thread,
+        instagram: result.data.instagramCaption,
+      });
+    } catch {
+      // API unavailable — fall back to mock posts
+      await new Promise((r) => setTimeout(r, 1200));
+      setPosts(generateMockPosts(guest));
+    }
+
     setState('done');
   };
 
