@@ -51,12 +51,11 @@ Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **[Sourav Na
 
 <br/>
 
-[The Opportunity](#the-opportunity) &nbsp;·&nbsp;
+[The Problem](#the-problem) &nbsp;·&nbsp;
 [The Product](#the-product) &nbsp;·&nbsp;
 [AI Layer](#ai-layer) &nbsp;·&nbsp;
 [Architecture](#architecture) &nbsp;·&nbsp;
-[Business Model](#business-model) &nbsp;·&nbsp;
-[The Team](#the-team)
+[Tech Stack](#tech-stack)
 
 <br/>
 
@@ -64,24 +63,11 @@ Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **[Sourav Na
 
 ---
 
-## The Opportunity
+## The Problem
 
-**The podcast market is structurally underserved. The tools built for it are wrong by design.**
+**Every tool a podcast host reaches for was built for a different job.** HubSpot is a sales CRM. PodMatch is a discovery marketplace. Notion is a blank canvas that requires engineering to become anything useful. None of them model the guest lifecycle — the arc from discovery through outreach, scheduling, recording, publishing, and follow-up — as a first-class object.
 
-| Signal | Data |
-|--------|------|
-| Active podcasts globally | 4.2M+ (Edison Research, 2025) |
-| Podcast ad revenue (US, 2025) | $2.5B and growing 15% YoY |
-| Podcast booking agencies worldwide | 2,000+ managing $500M+ in fees |
-| Avg time a host spends on guest ops | 8–12 hours per guest, end-to-end |
-| Hosts using spreadsheets as their CRM | ~73% (our own survey, n=140) |
-| Creator economy total size (2027 est.) | $480B (Goldman Sachs) |
-
-The problem isn't that podcast hosts are unsophisticated. It's that **every tool they reach for was built for a different job**. HubSpot is a sales CRM. PodMatch is a discovery marketplace. Notion is a blank canvas that requires engineering to become anything useful. None of them model the guest lifecycle — the three-to-six month arc from discovery through outreach, scheduling, recording, publishing, and follow-up — as a first-class object.
-
-We do.
-
-**Why now:** The AI capability required to make this product genuinely differentiated arrived in 2024. Guest fit scoring, personalized outreach at scale, interview prep, follow-up sequences — these need a model with the instruction-following depth of claude-sonnet-4-6. The window to build this with a real moat is open. It won't be open for long.
+This tool does. Guest fit scoring, personalized outreach drafting, interview prep, and follow-up sequences run on `claude-sonnet-4-6`, which is what makes automating those specific steps viable now in a way that wasn't a couple of years ago.
 
 ---
 
@@ -290,7 +276,7 @@ We hold a Minimum Lovable Product bar on every PR. Elena Verna's framing: the th
 
 ---
 
-## Business Model
+## Pricing
 
 Two-tier SaaS. Simple pricing that grows with the customer.
 
@@ -299,14 +285,7 @@ Two-tier SaaS. Simple pricing that grows with the customer.
 | **Solo** | $29/month | Independent podcast hosts managing 1 show, 20–100 guests/year |
 | **Agency** | $99/month | Booking agencies managing 3+ shows and 200+ pitches/year |
 
-**Unit economics (modeled):**
-- CAC target: < $150 via podcast host communities, Twitter, and content marketing
-- LTV at 24-month average retention: Solo $696 · Agency $2,376
-- LTV:CAC > 4.5x at both tiers before any expansion revenue
-
-**Expansion lever:** Usage-based AI credits above the base tier. Each AI feature (outreach email, fit score, brief, social post) costs fractions of a cent. We absorb the first 200 AI calls/month; above that, teams pay for what they use. This aligns our costs with the most engaged, highest-value customers.
-
-**Distribution thesis:** Podcast hosts are highly networked within communities (Podcast Movement, r/podcasting, Transistor community). A single agency customer is a wedge into 3–5 shows. Content marketing (prompt engineering breakdowns, booking playbooks) attracts the exact audience we serve.
+Usage-based AI credits above the base tier: the first 200 AI calls/month (outreach email, fit score, brief, social post) are included, above that teams pay for what they use.
 
 ---
 
@@ -556,8 +535,7 @@ The stack used:
 
 <div align="center">
 
-**The codebase is built to be evaluated, not just to run.**<br/>
-Clone it. Read it. Run it. Then decide.
+**Star it if you find it useful.**
 
 <br/>
 
