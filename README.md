@@ -19,7 +19,6 @@
 <p>
   <img src="https://img.shields.io/github/last-commit/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=last%20commit" alt="Last Commit"/>
   <img src="https://img.shields.io/github/commit-activity/m/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=commits%2Fmonth" alt="Commit Activity"/>
-  <img src="https://img.shields.io/badge/status-accelerator%20ready-22c55e?style=flat-square" alt="Accelerator Ready"/>
 </p>
 
 <!-- Stack -->
@@ -41,6 +40,10 @@
   <img src="https://img.shields.io/badge/CodeQL-enabled-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="CodeQL"/>
   <img src="https://img.shields.io/badge/License-Proprietary-64748b?style=for-the-badge" alt="License"/>
 </p>
+
+<br/>
+
+![CLI login and first command](docs/demo.gif)
 
 <br/>
 
@@ -492,8 +495,6 @@ podcast-guest-crm-cli guest list --stage discover --json
 ```
 
 `login` authenticates directly against Supabase's own REST auth endpoint (`POST <SUPABASE_URL>/auth/v1/token?grant_type=password`), the same identity provider the web app uses. It never uses the dev-only `Bearer dev-mock-token` shortcut in `apps/api/src/plugins/auth.ts`, that bypass exists purely for local API testing. The resulting session is cached to `~/.config/podcast-guest-crm-cli/credentials.json` (permissions `0600`) and refreshed silently with the stored refresh token when it expires.
-
-![CLI login and first command](docs/demo.gif)
 
 ![CLI guest list and analytics summary](docs/usage.gif)
 
