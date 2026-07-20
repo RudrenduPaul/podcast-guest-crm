@@ -43,7 +43,7 @@
 
 <br/>
 
-![CLI login and first command](docs/demo.gif)
+![CLI login and first command](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/demo.gif)
 
 <br/>
 
@@ -475,7 +475,7 @@ podcast-guest-crm-cli guest list --stage discover --json
 
 `login` authenticates directly against Supabase's own REST auth endpoint (`POST <SUPABASE_URL>/auth/v1/token?grant_type=password`), the same identity provider the web app uses. It never uses the dev-only `Bearer dev-mock-token` shortcut in `apps/api/src/plugins/auth.ts`, that bypass exists purely for local API testing. The resulting session is cached to `~/.config/podcast-guest-crm-cli/credentials.json` (permissions `0600`) and refreshed silently with the stored refresh token when it expires.
 
-![CLI guest list and analytics summary](docs/usage.gif)
+![CLI guest list and analytics summary](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/usage.gif)
 
 ---
 
