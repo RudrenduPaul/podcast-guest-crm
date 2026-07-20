@@ -31,6 +31,9 @@
   ],
   "license": "SEE LICENSE IN LICENSE",
   "author": "Rudrendu Paul",
+  "contributors": [
+    "Sourav Nandy"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RudrenduPaul/podcast-guest-crm.git",
