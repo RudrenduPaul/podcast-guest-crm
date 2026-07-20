@@ -1,6 +1,6 @@
 {
   "name": "podcast-guest-crm-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Command-line client for Podcast Guest CRM: manage the guest lifecycle (discover, outreach, scheduled, recorded, published, follow_up), draft AI outreach emails, and pull pipeline analytics from your terminal or an agent.",
   "type": "module",
   "main": "./dist/index.js",
