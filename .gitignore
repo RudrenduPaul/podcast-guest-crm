@@ -44,3 +44,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Python (packages/cli-pypi-wrapper)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+

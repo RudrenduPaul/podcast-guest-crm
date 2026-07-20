@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "podcast-guest-crm-cli"
+version = "0.1.0"
+description = "Command-line client for Podcast Guest CRM: manage the guest lifecycle, draft AI outreach emails, and pull pipeline analytics. Thin wrapper around the real Node.js CLI, for pip/pipx users."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Proprietary" }
+authors = [
+  { name = "Rudrendu Paul" },
+  { name = "Sourav Nandy" },
+]
+keywords = ["podcast", "guest-crm", "cli", "outreach", "supabase", "fastify", "agent-native"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Communications :: Email",
+  "Topic :: Office/Business",
+  "Topic :: Utilities",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/RudrenduPaul/podcast-guest-crm"
+Repository = "https://github.com/RudrenduPaul/podcast-guest-crm"
+Issues = "https://github.com/RudrenduPaul/podcast-guest-crm/issues"
+
+[project.scripts]
+podcast-guest-crm-cli = "podcast_guest_crm_cli.cli:main"
+pgcrm = "podcast_guest_crm_cli.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/podcast_guest_crm_cli"]

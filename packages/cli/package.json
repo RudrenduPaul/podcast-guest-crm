@@ -1,0 +1,56 @@
+{
+  "name": "podcast-guest-crm-cli",
+  "version": "0.1.0",
+  "description": "Command-line client for Podcast Guest CRM: manage the guest lifecycle (discover, outreach, scheduled, recorded, published, follow_up), draft AI outreach emails, and pull pipeline analytics from your terminal or an agent.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "podcast-guest-crm-cli": "./bin/podcast-guest-crm-cli.js",
+    "pgcrm": "./bin/podcast-guest-crm-cli.js"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean --target node20",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts"
+  },
+  "keywords": [
+    "podcast",
+    "guest-crm",
+    "cli",
+    "outreach",
+    "supabase",
+    "fastify",
+    "agent-native"
+  ],
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Rudrendu Paul",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RudrenduPaul/podcast-guest-crm.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/RudrenduPaul/podcast-guest-crm#readme",
+  "bugs": {
+    "url": "https://github.com/RudrenduPaul/podcast-guest-crm/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.4.0",
+    "@types/node": "^20.0.0"
+  }
+}

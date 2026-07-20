@@ -409,7 +409,9 @@ podcast-guest-crm/
 │   ├── types/                       # Shared TypeScript interfaces — single source of truth
 │   ├── config/                      # Zod env validation · shared constants
 │   ├── db/                          # Drizzle schema · 34 seed guests · migrations
-│   └── ai/                          # ClaudeClient · 6 typed prompt modules
+│   ├── ai/                          # ClaudeClient · 6 typed prompt modules
+│   ├── cli/                         # podcast-guest-crm-cli: TypeScript CLI, wraps apps/api
+│   └── cli-pypi-wrapper/            # Thin pip/pipx wrapper, shells out to the npm CLI
 │
 ├── .claude/
 │   ├── commands/                    # /new-feature · /review-pr
@@ -459,6 +461,41 @@ discover → outreach → scheduled → recorded → published → follow_up
                ↑___________↑          ↑__________↑
           (reschedule)          (re-record needed)
 ```
+
+---
+
+## CLI
+
+`podcast-guest-crm-cli` is a real TypeScript CLI (`packages/cli`) that wraps the same API above. Every command maps to a real route, no invented endpoints.
+
+```bash
+npm install -g podcast-guest-crm-cli
+# or, for Python-first / pip environments (thin wrapper, shells out to the npm package via npx):
+pip install podcast-guest-crm-cli
+```
+
+```bash
+podcast-guest-crm-cli login
+podcast-guest-crm-cli guest list --stage published --limit 5
+podcast-guest-crm-cli guest show <id>
+podcast-guest-crm-cli guest add --name "Ada Lovelace" --email ada@example.com --title "Engineer" --company "Analytical Engines"
+podcast-guest-crm-cli guest stage <id> outreach --reason "replied positively"
+podcast-guest-crm-cli outreach draft <guest-id> --episode-angle "AI safety"
+podcast-guest-crm-cli analytics summary
+podcast-guest-crm-cli analytics pipeline
+```
+
+Add `--json` to any data-returning command for machine-readable output, meant for scripts and agents:
+
+```bash
+podcast-guest-crm-cli guest list --stage discover --json
+```
+
+`login` authenticates directly against Supabase's own REST auth endpoint (`POST <SUPABASE_URL>/auth/v1/token?grant_type=password`), the same identity provider the web app uses. It never uses the dev-only `Bearer dev-mock-token` shortcut in `apps/api/src/plugins/auth.ts`, that bypass exists purely for local API testing. The resulting session is cached to `~/.config/podcast-guest-crm-cli/credentials.json` (permissions `0600`) and refreshed silently with the stored refresh token when it expires.
+
+![CLI login and first command](docs/demo.gif)
+
+![CLI guest list and analytics summary](docs/usage.gif)
 
 ---
 
@@ -530,6 +567,42 @@ Clone it. Read it. Run it. Then decide.
 *Built with [Claude Code](https://claude.ai/code)*
 
 </div>
+
+---
+
+## FAQ
+
+**What is `podcast-guest-crm-cli` and how is it different from using the web app?**
+
+It's a real TypeScript command-line client (`packages/cli`) for the same API the Next.js web app calls. It wraps the guest lifecycle endpoints (`guest list/add/show/stage`), the AI outreach drafting endpoint (`outreach draft`), and the analytics endpoints (`analytics summary/pipeline`). The differentiator is agent-native output: every data-returning command supports `--json`, so a script or an AI agent can drive the same pipeline a human would drive from the dashboard, without scraping HTML or maintaining its own HTTP client.
+
+**What platforms and runtimes does it support?**
+
+The npm package (`podcast-guest-crm-cli` on npm, requires Node.js 20 or newer) runs on macOS, Linux, and Windows anywhere Node runs. A separate PyPI package of the same name (`packages/cli-pypi-wrapper`) is a thin wrapper for pip/pipx users: it doesn't reimplement the CLI in Python, it checks that `node` and `npx` are on `PATH` and shells out to the npm package, pinned to the wrapper's own version.
+
+**How does login work?**
+
+`podcast-guest-crm-cli login` prompts for your email and password, then authenticates directly against your Supabase project's own REST endpoint (`POST <SUPABASE_URL>/auth/v1/token?grant_type=password`), the same identity provider the web app uses. You'll need your deployment's Supabase project URL and anon key (`--supabase-url` / `--supabase-anon-key`, or `PODCAST_GUEST_CRM_SUPABASE_URL` / `PODCAST_GUEST_CRM_SUPABASE_ANON_KEY`), matching the values your deployment already sets as `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`. The resulting access and refresh tokens are cached to `~/.config/podcast-guest-crm-cli/credentials.json` with `0600` permissions, and the access token refreshes silently once it expires.
+
+**Why did a command print `{"data": {}}` instead of the fields I expected?**
+
+That's a real, current gap in a few of the API's own Fastify response schemas (`apps/api/src/routes/guests.ts`), not a CLI bug: routes like `PATCH /guests/:id/stage`, `POST /guests`, and `GET /guests/:id` declare their response shape as a bare `{ type: 'object' }` with no listed properties, so Fastify's JSON serializer strips the body down to an empty object even on success. The CLI detects this and falls back to printing the raw (empty) response instead of crashing on a missing field. `guest list` isn't affected, since its schema declares an array with no fixed item shape.
+
+**Can I use this CLI in an automated pipeline or hand it to an AI agent?**
+
+Yes, that's the primary design goal. Every data-returning command accepts `--json` for structured output, exit codes are nonzero on failure, and error responses are JSON objects with `error`, `message`, and `statusCode` fields when `--json` is set. There's no interactive-only path required for any command except `login`'s password prompt, which also accepts `--email` and `--password` flags for non-interactive use.
+
+**Can I use this CLI, or the rest of this codebase, commercially?**
+
+Not without written approval. This repository (including `packages/cli` and `packages/cli-pypi-wrapper`) is proprietary, jointly owned by Rudrendu Paul and Sourav Nandy. See [LICENSE](LICENSE) for the exact permitted and restricted uses; commercial use, derivative products, and white-labeling all require prior written approval from both owners.
+
+**Does the CLI ever store or transmit my password?**
+
+No. The password you enter at the `login` prompt is sent once, over HTTPS, directly to Supabase's password grant endpoint, and is never written to disk. Only the resulting access token, refresh token, and their expiry are cached locally.
+
+**What happens if my session expires while I'm running a command?**
+
+The CLI checks the cached access token's expiry (with a 30-second buffer) before every request. If it's expired, the CLI calls Supabase's refresh-token grant with the stored refresh token, saves the new session, and retries, all without prompting you to log in again. You'll only see `login` errors again once the refresh token itself is invalidated (for example, after a password change).
 
 ---
 
