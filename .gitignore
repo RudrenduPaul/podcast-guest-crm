@@ -52,3 +52,6 @@ __pycache__/
 .venv/
 venv/
 
+# Agent tooling scaffolding — local only, never public
+.claude/
+
