@@ -65,7 +65,7 @@ export async function registerAuth(server: FastifyInstance): Promise<void> {
         }
 
         await request.jwtVerify();
-      } catch (error) {
+      } catch {
         return reply.status(401).send({
           error: 'Unauthorized',
           message: 'Invalid or expired token',
