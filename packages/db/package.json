@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.30.0",
-    "better-sqlite3": "^9.4.0"
+    "better-sqlite3": "^9.4.0",
+    "@podcast-crm/types": "workspace:*"
   },
   "devDependencies": {
     "drizzle-kit": "^0.20.0",

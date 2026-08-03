@@ -16,23 +16,23 @@ export interface Guest {
   title: string;
   company: string;
   bio: string;
-  avatarUrl?: string;
-  linkedinUrl?: string;
-  twitterHandle?: string;
-  websiteUrl?: string;
+  avatarUrl?: string | undefined;
+  linkedinUrl?: string | undefined;
+  twitterHandle?: string | undefined;
+  websiteUrl?: string | undefined;
   topics: string[];
   fitScore: number; // 0-100, AI-generated
   stage: GuestLifecycleStage;
   priority: GuestPriority;
   notes: string;
-  episodeTitle?: string;
-  episodeNumber?: number;
-  recordingDate?: string; // ISO date string
-  publishedDate?: string;
-  podcastUrl?: string;
-  nextFollowUpDate?: string;
+  episodeTitle?: string | undefined;
+  episodeNumber?: number | undefined;
+  recordingDate?: string | undefined; // ISO date string
+  publishedDate?: string | undefined;
+  podcastUrl?: string | undefined;
+  nextFollowUpDate?: string | undefined;
   outreachCount: number;
-  lastContactedAt?: string;
+  lastContactedAt?: string | undefined;
   createdAt: string;
   updatedAt: string;
 }

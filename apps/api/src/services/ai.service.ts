@@ -17,10 +17,10 @@ export const aiService = {
       showName: string;
       showDescription: string;
       hostName: string;
-      episodeAngle?: string;
-      recentWork?: string;
-      audienceSize?: string;
-      recentGuests?: string[];
+      episodeAngle?: string | undefined;
+      recentWork?: string | undefined;
+      audienceSize?: string | undefined;
+      recentGuests?: string[] | undefined;
     }
   ) {
     return generateOutreachEmail({
@@ -35,7 +35,7 @@ export const aiService = {
       showName: string;
       hostName: string;
       audienceDescription: string;
-      hostNotes?: string;
+      hostNotes?: string | undefined;
     }
   ) {
     return generateInterviewBrief({
@@ -50,7 +50,7 @@ export const aiService = {
       episodeTitle: string;
       episodeNumber: number;
       keyInsights: string[];
-      podcastUrl?: string;
+      podcastUrl?: string | undefined;
       showName: string;
     }
   ) {

@@ -33,9 +33,9 @@ export interface GuestResearchInput {
   name: string;
   title: string;
   company: string;
-  bio?: string;
-  linkedinUrl?: string;
-  websiteUrl?: string;
+  bio?: string | undefined;
+  linkedinUrl?: string | undefined;
+  websiteUrl?: string | undefined;
   showTopics: string[];
   audienceDescription: string;
 }

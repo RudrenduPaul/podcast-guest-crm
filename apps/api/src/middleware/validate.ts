@@ -1,10 +1,14 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 import { z, ZodError, type ZodSchema } from 'zod';
 
-export interface ValidationTarget {
-  body?: ZodSchema;
-  query?: ZodSchema;
-  params?: ZodSchema;
+export interface ValidationTarget<
+  TBodySchema extends ZodSchema | undefined = ZodSchema | undefined,
+  TQuerySchema extends ZodSchema | undefined = ZodSchema | undefined,
+  TParamsSchema extends ZodSchema | undefined = ZodSchema | undefined,
+> {
+  body?: TBodySchema;
+  query?: TQuerySchema;
+  params?: TParamsSchema;
 }
 
 export function formatZodError(error: ZodError): string {
@@ -13,35 +17,39 @@ export function formatZodError(error: ZodError): string {
     .join(', ');
 }
 
+type InferOrUnknown<TSchema extends ZodSchema | undefined> =
+  TSchema extends ZodSchema ? z.infer<TSchema> : unknown;
+
 /**
  * Validates request data against Zod schemas.
- * Returns parsed, type-safe data or throws a 400 error.
+ * Returns parsed, type-safe data (inferred from the schemas passed in) or
+ * throws a 400 error.
  */
 export async function validateRequest<
-  TBody = unknown,
-  TQuery = unknown,
-  TParams = unknown,
+  TBodySchema extends ZodSchema | undefined = undefined,
+  TQuerySchema extends ZodSchema | undefined = undefined,
+  TParamsSchema extends ZodSchema | undefined = undefined,
 >(
   request: FastifyRequest,
   reply: FastifyReply,
-  schemas: ValidationTarget
+  schemas: ValidationTarget<TBodySchema, TQuerySchema, TParamsSchema>
 ): Promise<{
-  body: TBody;
-  query: TQuery;
-  params: TParams;
+  body: InferOrUnknown<TBodySchema>;
+  query: InferOrUnknown<TQuerySchema>;
+  params: InferOrUnknown<TParamsSchema>;
 } | null> {
   try {
-    const body = schemas.body
-      ? (schemas.body.parse(request.body) as TBody)
-      : (request.body as TBody);
+    const body = (
+      schemas.body ? schemas.body.parse(request.body) : request.body
+    ) as InferOrUnknown<TBodySchema>;
 
-    const query = schemas.query
-      ? (schemas.query.parse(request.query) as TQuery)
-      : (request.query as TQuery);
+    const query = (
+      schemas.query ? schemas.query.parse(request.query) : request.query
+    ) as InferOrUnknown<TQuerySchema>;
 
-    const params = schemas.params
-      ? (schemas.params.parse(request.params) as TParams)
-      : (request.params as TParams);
+    const params = (
+      schemas.params ? schemas.params.parse(request.params) : request.params
+    ) as InferOrUnknown<TParamsSchema>;
 
     return { body, query, params };
   } catch (error) {

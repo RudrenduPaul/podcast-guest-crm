@@ -95,7 +95,7 @@ export async function outreachRoutes(server: FastifyInstance): Promise<void> {
 
         return reply.status(200).send({ data: draft });
       } catch (error) {
-        server.log.error('AI outreach draft failed:', error);
+        server.log.error({ err: error }, 'AI outreach draft failed');
         return reply.status(503).send({
           error: 'AIServiceError',
           message: 'Failed to generate outreach email. Please try again.',
