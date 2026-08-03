@@ -34,7 +34,7 @@ export interface InterviewBriefInput {
   showName: string;
   hostName: string;
   audienceDescription: string;
-  hostNotes?: string;
+  hostNotes?: string | undefined;
 }
 
 export async function generateInterviewBrief(input: InterviewBriefInput): Promise<InterviewBriefOutput> {

@@ -107,7 +107,7 @@ export default function DashboardPage() {
       bg: 'bg-violet-50',
       link: '/dashboard/analytics',
     },
-  ];
+  ] as const;
 
   return (
     <div className="p-6 space-y-6">
