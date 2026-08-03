@@ -74,6 +74,61 @@ def test_main_shells_out_to_npx_and_forwards_exit_code(monkeypatch):
     assert captured_args["command"][-3:] == ["analytics", "summary", "--json"]
 
 
+def test_resolve_npx_target_uses_pinned_version_when_published(monkeypatch):
+    monkeypatch.setattr(cli, "__version__", "0.1.0")
+    monkeypatch.setattr(cli, "npm_version_exists", lambda version: True)
+
+    assert cli.resolve_npx_target() == "podcast-guest-crm-cli@0.1.0"
+
+
+def test_resolve_npx_target_falls_back_to_latest_when_version_drifted(monkeypatch, capsys):
+    monkeypatch.setattr(cli, "__version__", "0.1.3")
+    monkeypatch.setattr(cli, "npm_version_exists", lambda version: False)
+
+    target = cli.resolve_npx_target()
+
+    assert target == "podcast-guest-crm-cli"
+    captured = capsys.readouterr()
+    assert "drifted out of lockstep" in captured.err
+
+
+def test_resolve_npx_target_skips_preflight_when_version_unknown(monkeypatch):
+    monkeypatch.setattr(cli, "__version__", "0.0.0")
+    monkeypatch.setattr(
+        cli, "npm_version_exists", lambda version: (_ for _ in ()).throw(AssertionError("should not be called"))
+    )
+
+    assert cli.resolve_npx_target() == "podcast-guest-crm-cli"
+
+
+def test_npm_version_exists_true_on_success(monkeypatch):
+    monkeypatch.setattr(
+        cli.subprocess,
+        "run",
+        lambda command, **kwargs: subprocess.CompletedProcess(command, returncode=0, stdout="0.1.2\n", stderr=""),
+    )
+    assert cli.npm_version_exists("0.1.2") is True
+
+
+def test_npm_version_exists_false_on_etarget(monkeypatch):
+    monkeypatch.setattr(
+        cli.subprocess,
+        "run",
+        lambda command, **kwargs: subprocess.CompletedProcess(
+            command, returncode=1, stdout="", stderr="npm error code ETARGET\n"
+        ),
+    )
+    assert cli.npm_version_exists("0.1.3") is False
+
+
+def test_npm_version_exists_defaults_true_on_timeout(monkeypatch):
+    def raise_timeout(command, **kwargs):
+        raise subprocess.TimeoutExpired(command, kwargs.get("timeout", 15))
+
+    monkeypatch.setattr(cli.subprocess, "run", raise_timeout)
+    assert cli.npm_version_exists("0.1.2") is True
+
+
 def test_main_forwards_nonzero_exit_code(monkeypatch):
     monkeypatch.setattr(cli, "find_missing_runtime", lambda: None)
     monkeypatch.setattr(sys, "argv", ["podcast-guest-crm-cli", "guest", "show", "nonexistent"])

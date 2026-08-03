@@ -51,7 +51,7 @@ A typed CLI over the same Fastify API the web dashboard uses, with persistent lo
 `~/.config/podcast-guest-crm-cli/credentials.json`, file mode `0600`. Nothing is sent anywhere except Supabase's own auth endpoint and the API URL you configure.
 
 **Does this work on Windows, macOS, and Linux?**
-Yes. No compiled dependencies, pure Node 18+.
+Yes. No compiled dependencies, pure Node 20+ (matches the `engines.node` field in `package.json`).
 
 **What's the licensing situation?**
 This CLI ships from the same repository as, and under the same license as, Podcast Guest CRM itself: proprietary, copyright Rudrendu Paul and Sourav Nandy. See [LICENSE](https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE).

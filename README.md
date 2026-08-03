@@ -47,7 +47,7 @@
 
 <br/>
 
-Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **[Sourav Nandy](https://github.com/essen-code)** &nbsp;·&nbsp; Engineered with [**Claude Code**](https://claude.ai/code)
+Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **Sourav Nandy** &nbsp;·&nbsp; Engineered with [**Claude Code**](https://claude.ai/code)
 
 <br/>
 
@@ -557,7 +557,7 @@ It's a real TypeScript command-line client (`packages/cli`) for the same API the
 
 **What platforms and runtimes does it support?**
 
-The npm package (`podcast-guest-crm-cli` on npm, requires Node.js 20 or newer) runs on macOS, Linux, and Windows anywhere Node runs. A separate PyPI package of the same name (`packages/cli-pypi-wrapper`) is a thin wrapper for pip/pipx users: it doesn't reimplement the CLI in Python, it checks that `node` and `npx` are on `PATH` and shells out to the npm package, pinned to the wrapper's own version.
+The npm package (`podcast-guest-crm-cli` on npm, requires Node.js 20 or newer) runs on macOS, Linux, and Windows anywhere Node runs. A separate PyPI package of the same name (`packages/cli-pypi-wrapper`) is a thin wrapper for pip/pipx users: it doesn't reimplement the CLI in Python, it checks that `node` and `npx` are on `PATH` and shells out to the npm package, pinned to the wrapper's own version -- falling back to npm's `latest` release if that exact version was never published to npm, rather than failing outright.
 
 **How does login work?**
 
