@@ -2,7 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { guestService } from '../services/guest.service';
 import { aiService } from '../services/ai.service';
-import { validateRequest, idParamSchema } from '../middleware/validate';
+import { validateRequest } from '../middleware/validate';
 
 const DEMO_SHOW = {
   name: 'The Signal & The Noise',
