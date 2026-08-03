@@ -13,13 +13,13 @@ import { analyticsRoutes } from './routes/analytics';
 const env = parseServerEnv();
 
 const server = Fastify({
-  logger: {
-    level: env.NODE_ENV === 'production' ? 'warn' : 'info',
-    transport:
-      env.NODE_ENV !== 'production'
-        ? { target: 'pino-pretty', options: { colorize: true } }
-        : undefined,
-  },
+  logger:
+    env.NODE_ENV === 'production'
+      ? { level: 'warn' }
+      : {
+          level: 'info',
+          transport: { target: 'pino-pretty', options: { colorize: true } },
+        },
 });
 
 async function bootstrap(): Promise<void> {

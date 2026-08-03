@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -13,12 +14,21 @@ import {
   ChevronLeft,
   Radio,
   Sparkles,
+  type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/stores/ui.store';
 import { seedWorkspace } from '@/lib/mock-data';
 
-const navItems = [
+interface NavItem {
+  href: Route;
+  label: string;
+  icon: LucideIcon;
+  exact?: boolean;
+  badge?: string;
+}
+
+const navItems: NavItem[] = [
   {
     href: '/dashboard',
     label: 'Dashboard',

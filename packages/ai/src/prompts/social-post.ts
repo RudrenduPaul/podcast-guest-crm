@@ -35,7 +35,7 @@ export interface SocialPostInput {
   episodeTitle: string;
   episodeNumber: number;
   keyInsights: string[];
-  podcastUrl?: string;
+  podcastUrl?: string | undefined;
   showName: string;
 }
 
