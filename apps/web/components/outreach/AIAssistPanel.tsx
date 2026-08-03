@@ -160,7 +160,7 @@ Rudrendu Paul`;
               </div>
               <div className="text-center">
                 <p className="text-sm font-medium text-slate-700">Claude is thinking...</p>
-                <p className="text-xs text-slate-400 mt-1">Analyzing {guest.name}'s profile</p>
+                <p className="text-xs text-slate-400 mt-1">Analyzing {guest.name}&apos;s profile</p>
               </div>
               {/* Shimmer bars */}
               <div className="w-full space-y-2 px-2">
