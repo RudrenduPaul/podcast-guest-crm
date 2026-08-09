@@ -477,6 +477,8 @@ podcast-guest-crm-cli guest list --stage discover --json
 
 ![CLI guest list and analytics summary](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/usage.gif)
 
+![Full podcast-guest-crm-cli --help reference, showing every real subcommand and its flags](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/cli-help-reference.gif)
+
 ---
 
 ## Security
