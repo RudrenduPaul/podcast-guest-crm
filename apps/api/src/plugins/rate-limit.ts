@@ -18,6 +18,6 @@ export async function registerRateLimit(server: FastifyInstance): Promise<void> 
       return ip ?? 'unknown';
     },
     // Exempt health check from rate limiting
-    allowList: (request) => request.routerPath === '/health',
+    allowList: (request) => request.routeOptions.url === '/health',
   });
 }
