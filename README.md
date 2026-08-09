@@ -4,7 +4,40 @@
 
 <h1>🎙️ Podcast Guest CRM</h1>
 
+<br/>
+
+<!-- Core cluster: 5 badges, cap enforced. Full stack badges collapsed below -->
+<p>
+  <img src="https://img.shields.io/github/last-commit/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=last%20commit" alt="Last Commit"/>
+  <img src="https://img.shields.io/github/commit-activity/m/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=commits%2Fmonth" alt="Commit Activity"/>
+  <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI"/>
+  <img src="https://img.shields.io/badge/CodeQL-enabled-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="CodeQL"/>
+  <img src="https://img.shields.io/badge/License-Proprietary-64748b?style=for-the-badge" alt="License"/>
+</p>
+
+<details>
+<summary>Full tech stack badges</summary>
+<br/>
+<p>
+  <img src="https://img.shields.io/badge/TypeScript-5.4-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/Fastify-5.8-000000?style=for-the-badge&logo=fastify&logoColor=white" alt="Fastify"/>
+  <img src="https://img.shields.io/badge/pnpm-monorepo-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm"/>
+</p>
+<p>
+  <img src="https://img.shields.io/badge/Claude-claude--sonnet--4--6-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude AI"/>
+  <img src="https://img.shields.io/badge/Drizzle_ORM-SQLite%20%2F%20Turso-C5F74F?style=for-the-badge&logoColor=black" alt="Drizzle ORM"/>
+  <img src="https://img.shields.io/badge/Zod-validation-3068B7?style=for-the-badge&logo=zod&logoColor=white" alt="Zod"/>
+</p>
+</details>
+
+<br/>
+
 <h3>The operating system for podcast booking.<br/>AI-native. Keyboard-first. Built for agencies.</h3>
+
+<br/>
+
+![CLI login and first command](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/demo.gif)
 
 <br/>
 
@@ -15,42 +48,11 @@
 
 <br/>
 
-<!-- Activity -->
-<p>
-  <img src="https://img.shields.io/github/last-commit/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=last%20commit" alt="Last Commit"/>
-  <img src="https://img.shields.io/github/commit-activity/m/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=commits%2Fmonth" alt="Commit Activity"/>
-</p>
-
-<!-- Stack -->
-<p>
-  <img src="https://img.shields.io/badge/TypeScript-5.4-3178c6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
-  <img src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
-  <img src="https://img.shields.io/badge/Fastify-4.26-000000?style=for-the-badge&logo=fastify&logoColor=white" alt="Fastify"/>
-  <img src="https://img.shields.io/badge/pnpm-monorepo-F69220?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm"/>
-</p>
-
-<p>
-  <img src="https://img.shields.io/badge/Claude-claude--sonnet--4--6-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude AI"/>
-  <img src="https://img.shields.io/badge/Drizzle_ORM-SQLite%20%2F%20Turso-C5F74F?style=for-the-badge&logoColor=black" alt="Drizzle ORM"/>
-  <img src="https://img.shields.io/badge/Zod-validation-3068B7?style=for-the-badge&logo=zod&logoColor=white" alt="Zod"/>
-</p>
-
-<p>
-  <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI"/>
-  <img src="https://img.shields.io/badge/CodeQL-enabled-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="CodeQL"/>
-  <img src="https://img.shields.io/badge/License-Proprietary-64748b?style=for-the-badge" alt="License"/>
-</p>
-
-<br/>
-
-![CLI login and first command](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/demo.gif)
-
-<br/>
-
 Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **Sourav Nandy** &nbsp;·&nbsp; Engineered with [**Claude Code**](https://claude.ai/code)
 
 <br/>
 
+[Quick Start](#quick-start) &nbsp;·&nbsp;
 [The Problem](#the-problem) &nbsp;·&nbsp;
 [The Product](#the-product) &nbsp;·&nbsp;
 [AI Layer](#ai-layer) &nbsp;·&nbsp;
@@ -60,6 +62,28 @@ Built by **[Rudrendu Paul](https://github.com/RudrenduPaul)** &amp; **Sourav Nan
 <br/>
 
 </div>
+
+---
+
+## Quick Start
+
+```bash
+git clone https://github.com/RudrenduPaul/podcast-guest-crm
+cd podcast-guest-crm
+pnpm install
+pnpm dev
+```
+
+The app runs on seed data from first boot; 34 realistic guests across all six pipeline stages. No environment variables required.
+
+```
+web:  http://localhost:3000
+api:  http://localhost:3001
+docs: http://localhost:3001/docs   ← Swagger UI, auto-generated from route schemas
+```
+
+> [!NOTE]
+> Zero-config only applies to this local dev mode running on seed data. A production deployment needs real Supabase and Anthropic credentials set in the environment: the Zod env schema in `packages/config` crashes the server at boot if a required secret is missing, by design.
 
 ---
 
@@ -112,23 +136,6 @@ The app is designed for keyboard-first workflows. Power users never touch the mo
 | `Esc` | Close any modal |
 
 ---
-
-## Quick Start
-
-```bash
-git clone https://github.com/RudrenduPaul/podcast-guest-crm
-cd podcast-guest-crm
-pnpm install
-pnpm dev
-```
-
-The app runs on seed data from first boot; 34 realistic guests across all six pipeline stages. No environment variables required.
-
-```
-web:  http://localhost:3000
-api:  http://localhost:3001
-docs: http://localhost:3001/docs   ← Swagger UI, auto-generated from route schemas
-```
 
 ## AI Layer
 
@@ -198,7 +205,7 @@ Browser (Next.js 14 App Router)
         │  HTTP/REST + JWT (Bearer token)
         ▼
 
-Fastify v4 API (Node.js 20, TypeScript strict mode)
+Fastify v5 API (Node.js 20, TypeScript strict mode)
 ├── Plugins: CORS (allowlist), @fastify/rate-limit (100/min), @fastify/jwt, swagger-ui
 ├── Routes: /guests, /outreach, /ai, /analytics  ← all require authentication
 ├── Middleware: Zod schemas on every route. Body, query params, path params
@@ -339,7 +346,7 @@ Every choice is defended. No resume-driven development.
 | **Drag & Drop** | @hello-pangea/dnd | Production-proven fork of react-beautiful-dnd. Maintained. Accessible. Drops in identically. |
 | **Server State** | TanStack Query v5 | Stale-while-revalidate. Optimistic updates. Auto background refetch. The kanban board is instant because of this. |
 | **UI State** | Zustand | Minimal API. Sidebar, modals, command palette, filters. All persisted to localStorage in one line of middleware. |
-| **API** | Fastify v4 | ~2x faster than Express at the p99. First-class TypeScript. `@fastify/swagger` generates OpenAPI from route schemas automatically. |
+| **API** | Fastify v5 | ~2x faster than Express at the p99. First-class TypeScript. `@fastify/swagger` generates OpenAPI from route schemas automatically. |
 | **Validation** | Zod | One schema = one TypeScript type + one runtime validator. On every route. No exceptions. |
 | **ORM** | Drizzle ORM | No code generation. Schema is plain TypeScript. Migrations are plain SQL. Queries are fully type-safe. |
 | **Database** | SQLite (dev) / Turso (prod) | Zero config locally. Identical schema to production. Turso adds global edge distribution when we need it. |
@@ -380,7 +387,7 @@ podcast-guest-crm/
 │   │   ├── lib/                     # api.ts · mock-data.ts · utils.ts
 │   │   └── stores/                  # Zustand. Sidebar · modals · palette · filters
 │   │
-│   └── api/                         # Fastify v4 backend
+│   └── api/                         # Fastify v5 backend
 │       └── src/
 │           ├── plugins/             # cors · rate-limit · jwt · swagger-ui
 │           ├── routes/              # /guests · /outreach · /ai · /analytics
@@ -435,6 +442,9 @@ POST   /api/v1/ai/social-post         LinkedIn + Twitter thread + Instagram capt
 GET    /api/v1/analytics/overview     Dashboard metrics + recent activity feed
 GET    /api/v1/analytics/pipeline     Stage funnel + outreach activity timeline
 ```
+
+> [!WARNING]
+> `PATCH /guests/:id/stage`, `POST /guests`, and `GET /guests/:id` currently declare their response shape as a bare `{ type: 'object' }` with no listed properties in `apps/api/src/routes/guests.ts`. Fastify's JSON serializer strips the body down to `{}` on success as a result, even though the operation succeeded. `guest list` is unaffected. See the FAQ for how the CLI works around this.
 
 Lifecycle transitions enforced at the service layer:
 

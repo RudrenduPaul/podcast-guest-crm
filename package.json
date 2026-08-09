@@ -1,6 +1,19 @@
 {
   "name": "podcast-guest-crm",
   "private": true,
+  "description": "AI-native CRM for podcast guest booking: lifecycle pipeline, AI outreach drafting, and a real CLI.",
+  "keywords": [
+    "podcast",
+    "podcast-crm",
+    "guest-booking",
+    "podcast-management",
+    "outreach-automation",
+    "ai-crm",
+    "nextjs",
+    "fastify",
+    "monorepo",
+    "claude-ai"
+  ],
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
