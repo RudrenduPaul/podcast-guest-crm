@@ -8,11 +8,11 @@
     "migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "drizzle-orm": "^0.30.0",
+    "drizzle-orm": "^0.45.2",
     "better-sqlite3": "^9.4.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.20.0",
+    "drizzle-kit": "^0.31.10",
     "@types/better-sqlite3": "^7.6.0",
     "typescript": "^5.4.0"
   }
