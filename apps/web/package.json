@@ -49,7 +49,7 @@
     "@types/canvas-confetti": "^1.6.0",
     "typescript": "^5.4.0",
     "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.0",
+    "postcss": "^8.5.23",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.0"
   }
