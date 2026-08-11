@@ -491,6 +491,30 @@ podcast-guest-crm-cli guest list --stage discover --json
 
 ---
 
+## MCP Server
+
+`podcast-guest-crm-cli` ships a Model Context Protocol server (not to be confused with the third-party MCP servers this app can integrate *with*, listed above). `podcast-guest-crm-cli mcp` starts it over stdio, exposing five tools that call straight into the same API seam every CLI command uses: `list_guests`, `add_guest`, `update_guest_stage`, `draft_outreach_email`, and `get_analytics_summary`.
+
+```bash
+npm install -g podcast-guest-crm-cli
+podcast-guest-crm-cli login
+```
+
+```json
+{
+  "mcpServers": {
+    "podcast-guest-crm": {
+      "command": "npx",
+      "args": ["podcast-guest-crm-cli", "mcp"]
+    }
+  }
+}
+```
+
+A real `tools/call` for the core lifecycle tool, `{"name": "update_guest_stage", "arguments": {"id": "guest_1", "stage": "outreach"}}`, returns the same envelope `guest stage <id> outreach --json` prints on the CLI. See [`packages/cli`'s README](packages/cli/README.md#mcp-server) for the full tool reference.
+
+---
+
 ## Security
 
 Production-grade controls from day one. We don't retrofit security.
@@ -581,7 +605,7 @@ That's a real, current gap in a few of the API's own Fastify response schemas (`
 
 **Can I use this CLI in an automated pipeline or hand it to an AI agent?**
 
-Yes, that's the primary design goal. Every data-returning command accepts `--json` for structured output, exit codes are nonzero on failure, and error responses are JSON objects with `error`, `message`, and `statusCode` fields when `--json` is set. There's no interactive-only path required for any command except `login`'s password prompt, which also accepts `--email` and `--password` flags for non-interactive use.
+Yes, that's the primary design goal. Every data-returning command accepts `--json` for structured output, exit codes are nonzero on failure, and error responses are JSON objects with `error`, `message`, and `statusCode` fields when `--json` is set. There's no interactive-only path required for any command except `login`'s password prompt, which also accepts `--email` and `--password` flags for non-interactive use. For MCP-native agents (Claude Desktop, Claude Code), `podcast-guest-crm-cli mcp` starts a stdio MCP server exposing the same guest-lifecycle, outreach-drafting, and analytics capability as callable tools, see [MCP Server](#mcp-server) above.
 
 **Can I use this CLI, or the rest of this codebase, commercially?**
 

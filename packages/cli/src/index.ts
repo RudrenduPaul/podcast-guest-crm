@@ -1,25 +1,11 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
 import { registerLoginCommand } from './commands/login';
 import { registerGuestCommands } from './commands/guest';
 import { registerOutreachCommands } from './commands/outreach';
 import { registerAnalyticsCommands } from './commands/analytics';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-function readVersion(): string {
-  try {
-    const pkg = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf-8')) as {
-      version: string;
-    };
-    return pkg.version;
-  } catch {
-    return '0.0.0';
-  }
-}
+import { startStdioServer } from './mcp/server';
+import { readVersion } from './version';
 
 const program = new Command();
 
@@ -37,6 +23,16 @@ registerLoginCommand(program);
 registerGuestCommands(program);
 registerOutreachCommands(program);
 registerAnalyticsCommands(program);
+
+program
+  .command('mcp')
+  .description(
+    'Start the Podcast Guest CRM MCP server over stdio, exposing list_guests, add_guest, ' +
+      'update_guest_stage, draft_outreach_email, and get_analytics_summary for agent-native invocation'
+  )
+  .action(async () => {
+    await startStdioServer();
+  });
 
 program.parseAsync(process.argv).catch((err: unknown) => {
   const message = err instanceof Error ? err.message : String(err);

@@ -1,3 +1,5 @@
+<!-- mcp-name: io.github.RudrenduPaul/podcast-guest-crm -->
+
 # podcast-guest-crm-cli
 
 Command-line client for [Podcast Guest CRM](https://github.com/RudrenduPaul/podcast-guest-crm): manage the guest lifecycle (discover, outreach, scheduled, recorded, published, follow_up), draft AI outreach emails, and pull pipeline analytics from your terminal or an agent. This package wraps the project's real Fastify API, no invented endpoints.
@@ -41,6 +43,36 @@ podcast-guest-crm-cli guest list --stage discover --json
 ```
 
 ![CLI guest list and analytics summary](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/usage.gif)
+
+## MCP Server
+
+`podcast-guest-crm-cli` ships a Model Context Protocol server, so an agent (Claude Desktop, Claude Code, or any other MCP client) can drive the guest pipeline directly instead of shelling out to the CLI. `podcast-guest-crm-cli mcp` starts the server over stdio, exposing five tools that call straight into the same `apiRequest()` seam every CLI command uses, no logic is reimplemented for the MCP path: `list_guests`, `add_guest`, `update_guest_stage`, `draft_outreach_email`, and `get_analytics_summary`. It requires `podcast-guest-crm-cli login` to have been run first; the cached session at `~/.config/podcast-guest-crm-cli/credentials.json` is reused automatically.
+
+```bash
+npm install -g podcast-guest-crm-cli
+podcast-guest-crm-cli login
+```
+
+Register it with an MCP client by pointing its server config at this binary with the `mcp` argument. For Claude Desktop or Claude Code, add an `mcpServers` block:
+
+```json
+{
+  "mcpServers": {
+    "podcast-guest-crm": {
+      "command": "npx",
+      "args": ["podcast-guest-crm-cli", "mcp"]
+    }
+  }
+}
+```
+
+`update_guest_stage` is the core lifecycle tool: given a guest ID and a target stage, it calls `PATCH /api/v1/guests/:id/stage` and returns the updated guest. An example `tools/call`:
+
+```json
+{"name": "update_guest_stage", "arguments": {"id": "guest_1", "stage": "outreach", "reason": "replied positively"}}
+```
+
+returns the same JSON envelope `guest stage <id> outreach --json` prints on the CLI. Every tool here is wrapped so a failure (not logged in, an invalid stage transition, a network error) comes back as a normal `isError: true` result instead of crashing the server.
 
 ## FAQ
 

@@ -1,3 +1,5 @@
+<!-- mcp-name: io.github.RudrenduPaul/podcast-guest-crm -->
+
 # podcast-guest-crm-cli (PyPI wrapper)
 
 ![CLI login and first command](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/demo.gif)
@@ -27,6 +29,8 @@ podcast-guest-crm-cli guest list --json
 ```
 
 ![CLI guest list and analytics summary](https://raw.githubusercontent.com/RudrenduPaul/podcast-guest-crm/main/docs/usage.gif)
+
+Every subcommand of the underlying npm package works through this wrapper unmodified, including `podcast-guest-crm-cli mcp`, which starts a Model Context Protocol server over stdio for MCP-native agents. See the [CLI package README](https://github.com/RudrenduPaul/podcast-guest-crm/tree/main/packages/cli#mcp-server) for the full tool reference and Claude Desktop config snippet.
 
 See the [main README](https://github.com/RudrenduPaul/podcast-guest-crm#readme) for the full command reference, the guest lifecycle model, and the FAQ.
 
