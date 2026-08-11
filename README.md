@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/github/commit-activity/m/RudrenduPaul/podcast-guest-crm?style=flat-square&color=6366f1&label=commits%2Fmonth" alt="Commit Activity"/>
   <img src="https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="CI"/>
   <img src="https://img.shields.io/badge/CodeQL-enabled-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="CodeQL"/>
-  <img src="https://img.shields.io/badge/License-Proprietary-64748b?style=for-the-badge" alt="License"/>
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License"/>
 </p>
 
 <details>
@@ -609,7 +609,7 @@ Yes, that's the primary design goal. Every data-returning command accepts `--jso
 
 **Can I use this CLI, or the rest of this codebase, commercially?**
 
-Not without written approval. This repository (including `packages/cli` and `packages/cli-pypi-wrapper`) is proprietary, jointly owned by Rudrendu Paul and Sourav Nandy. See [LICENSE](LICENSE) for the exact permitted and restricted uses; commercial use, derivative products, and white-labeling all require prior written approval from both owners.
+Yes. This repository (including `packages/cli` and `packages/cli-pypi-wrapper`) is MIT licensed, jointly owned by Rudrendu Paul and Sourav Nandy. See [LICENSE](LICENSE) for the full terms; commercial use, modification, and redistribution are all permitted.
 
 **Does the CLI ever store or transmit my password?**
 
@@ -623,6 +623,6 @@ The CLI checks the cached access token's expiry (with a 30-second buffer) before
 
 ## License
 
-Proprietary. See [LICENSE](LICENSE) for full terms.
+MIT. See [LICENSE](LICENSE) for full terms.
 
 Viewing and forking for personal or educational use is permitted. Commercial use, derivative products, or business deployment requires written approval from both owners.

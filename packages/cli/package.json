@@ -1,6 +1,6 @@
 {
   "name": "podcast-guest-crm-cli",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "mcpName": "io.github.RudrenduPaul/podcast-guest-crm",
   "description": "Command-line client for Podcast Guest CRM: manage the guest lifecycle (discover, outreach, scheduled, recorded, published, follow_up), draft AI outreach emails, and pull pipeline analytics from your terminal or an agent. Ships a Model Context Protocol server (`podcast-guest-crm-cli mcp`).",
   "type": "module",
@@ -32,7 +32,7 @@
     "mcp",
     "model-context-protocol"
   ],
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "author": "Rudrendu Paul",
   "contributors": [
     "Sourav Nandy"

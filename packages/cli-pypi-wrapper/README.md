@@ -36,4 +36,4 @@ See the [main README](https://github.com/RudrenduPaul/podcast-guest-crm#readme) 
 
 ## License
 
-Proprietary. See [LICENSE](https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE) in the parent repository for full terms.
+MIT. See [LICENSE](https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE) in the parent repository for full terms.

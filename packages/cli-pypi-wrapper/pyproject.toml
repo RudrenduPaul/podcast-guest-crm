@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "podcast-guest-crm-cli"
-version = "0.1.5"
+version = "0.1.6"
 description = "Command-line client for Podcast Guest CRM: manage the guest lifecycle, draft AI outreach emails, and pull pipeline analytics. Thin wrapper around the real Node.js CLI, for pip/pipx users. Ships a Model Context Protocol server (podcast-guest-crm-cli mcp)."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "Proprietary" }
+license = { text = "MIT" }
 authors = [
   { name = "Rudrendu Paul" },
   { name = "Sourav Nandy" },
@@ -18,7 +18,7 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
   "Intended Audience :: Developers",
-  "License :: Other/Proprietary License",
+  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.9",

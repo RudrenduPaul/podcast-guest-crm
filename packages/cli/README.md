@@ -86,10 +86,10 @@ A typed CLI over the same Fastify API the web dashboard uses, with persistent lo
 Yes. No compiled dependencies, pure Node 20+ (matches the `engines.node` field in `package.json`).
 
 **What's the licensing situation?**
-This CLI ships from the same repository as, and under the same license as, Podcast Guest CRM itself: proprietary, copyright Rudrendu Paul and Sourav Nandy. See [LICENSE](https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE).
+This CLI ships from the same repository as, and under the same license as, Podcast Guest CRM itself: MIT, copyright Rudrendu Paul and Sourav Nandy. See [LICENSE](https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE).
 
 See the [main README](https://github.com/RudrenduPaul/podcast-guest-crm#readme) for the full API reference and product FAQ.
 
 ## License
 
-Proprietary. See [LICENSE](https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE) in the parent repository for full terms.
+MIT. See [LICENSE](https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE) in the parent repository for full terms.
