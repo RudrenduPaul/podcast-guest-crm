@@ -162,7 +162,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-xs text-slate-600">Podcast Guest CRM · Proprietary Software</p>
+        <p className="text-xs text-slate-600">Podcast Guest CRM · MIT Licensed</p>
       </div>
     </div>
   );

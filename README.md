@@ -623,6 +623,4 @@ The CLI checks the cached access token's expiry (with a 30-second buffer) before
 
 ## License
 
-MIT. See [LICENSE](LICENSE) for full terms.
-
-Viewing and forking for personal or educational use is permitted. Commercial use, derivative products, or business deployment requires written approval from both owners.
+MIT. See [LICENSE](LICENSE) for full terms. Commercial use, modification, and redistribution are all permitted.

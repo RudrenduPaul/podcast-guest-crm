@@ -15,7 +15,7 @@ export async function registerSwagger(server: FastifyInstance): Promise<void> {
           url: 'https://github.com/RudrenduPaul/podcast-guest-crm',
         },
         license: {
-          name: 'Proprietary',
+          name: 'MIT',
           url: 'https://github.com/RudrenduPaul/podcast-guest-crm/blob/main/LICENSE',
         },
       },

@@ -48,11 +48,43 @@ const publicEnvSchema = z.object({
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
 export type PublicEnv = z.infer<typeof publicEnvSchema>;
 
-// In production (NODE_ENV=production), Zod will throw at startup if any
-// required env var is missing or invalid — the app will refuse to start
-// rather than running with missing credentials.
+// The `.default()` placeholders above let the app boot without any .env file
+// in local dev. They are NOT safe in production: if any of these values ever
+// reach a production process, the app would be silently running with a
+// guessable/public secret (e.g. a known JWT signing key). The list below is
+// every security-critical placeholder that must never survive into prod.
+const INSECURE_PRODUCTION_DEFAULTS: Partial<Record<keyof ServerEnv, string>> = {
+  ANTHROPIC_API_KEY: 'dev-placeholder-replace-in-production',
+  SUPABASE_SERVICE_ROLE_KEY: 'dev-placeholder-replace-in-production',
+  JWT_SECRET: 'dev-placeholder-jwt-secret-replace-in-production-32+',
+  RESEND_API_KEY: 'dev-placeholder-replace-in-production',
+};
+
+// In production (NODE_ENV=production), Zod throws at startup if any required
+// env var is missing or invalid. That alone is not enough: every secret above
+// also has a `.default()`, so a missing env var doesn't fail Zod validation,
+// it silently falls back to a well-known, publicly-visible placeholder value.
+// This second check closes that gap: in production mode, the server refuses
+// to boot if any security-critical secret still equals its insecure default.
 export function parseServerEnv(): ServerEnv {
-  return serverEnvSchema.parse(process.env);
+  const env = serverEnvSchema.parse(process.env);
+
+  if (env.NODE_ENV === 'production') {
+    const insecure = (Object.keys(INSECURE_PRODUCTION_DEFAULTS) as Array<keyof ServerEnv>).filter(
+      (key) => env[key] === INSECURE_PRODUCTION_DEFAULTS[key]
+    );
+
+    if (insecure.length > 0) {
+      throw new Error(
+        `Refusing to start: NODE_ENV=production but the following secret(s) are still set to ` +
+          `their insecure dev placeholder value: ${insecure.join(', ')}. Set real values via ` +
+          `environment variables or a secrets manager (e.g. Doppler, AWS Secrets Manager, Vercel env vars) ` +
+          `before deploying.`
+      );
+    }
+  }
+
+  return env;
 }
 
 export function parsePublicEnv(): PublicEnv {

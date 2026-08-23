@@ -45,8 +45,22 @@ describe('config (credentials storage)', () => {
     const path = getCredentialsPath();
     expect(existsSync(path)).toBe(true);
 
-    const mode = statSync(path).mode & 0o777;
-    expect(mode).toBe(0o600);
+    // Windows' NTFS/FAT filesystems don't implement POSIX permission bits the
+    // way Linux/macOS do: chmod on Windows can only toggle the read-only
+    // attribute, so statSync().mode always reports a fixed rw-rw-rw- (0o666)
+    // for a writable file regardless of the mode requested. Asserting an
+    // exact 0o600 there isn't testing our code, it's testing a filesystem
+    // limitation Node.js can't work around. Enforce the real guarantee
+    // (owner-only read/write, no group/other access) on the platforms where
+    // the OS actually honors it, and settle for existence + writability on
+    // Windows.
+    if (process.platform !== 'win32') {
+      const mode = statSync(path).mode & 0o777;
+      expect(mode).toBe(0o600);
+    } else {
+      const mode = statSync(path).mode & 0o777;
+      expect(mode & 0o600).toBe(0o600); // owner read/write present
+    }
 
     const loaded = loadCredentials();
     expect(loaded?.accessToken).toBe('access-1');
