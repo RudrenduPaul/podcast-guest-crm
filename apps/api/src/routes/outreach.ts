@@ -32,6 +32,15 @@ const sendOutreachSchema = z.object({
   body: z.string().min(1).max(10000),
 });
 
+const errorResponseSchema = {
+  type: 'object',
+  properties: {
+    error: { type: 'string' },
+    message: { type: 'string' },
+    statusCode: { type: 'number' },
+  },
+} as const;
+
 export async function outreachRoutes(server: FastifyInstance): Promise<void> {
   // POST /api/v1/outreach/draft
   server.post(
@@ -66,6 +75,8 @@ export async function outreachRoutes(server: FastifyInstance): Promise<void> {
               },
             },
           },
+          404: errorResponseSchema,
+          503: errorResponseSchema,
         },
       },
     },
@@ -125,6 +136,7 @@ export async function outreachRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           201: { type: 'object', properties: { data: { type: 'object' } } },
+          404: errorResponseSchema,
         },
       },
     },
@@ -184,6 +196,7 @@ export async function outreachRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           200: { type: 'object', properties: { data: { type: 'array' } } },
+          404: errorResponseSchema,
         },
       },
     },

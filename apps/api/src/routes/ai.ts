@@ -28,6 +28,15 @@ const socialPostSchema = z.object({
   podcastUrl: z.string().url().optional(),
 });
 
+const errorResponseSchema = {
+  type: 'object',
+  properties: {
+    error: { type: 'string' },
+    message: { type: 'string' },
+    statusCode: { type: 'number' },
+  },
+} as const;
+
 export async function aiRoutes(server: FastifyInstance): Promise<void> {
   // POST /api/v1/ai/fit-score
   server.post(
@@ -48,6 +57,8 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           200: { type: 'object', properties: { data: { type: 'object' } } },
+          404: errorResponseSchema,
+          503: errorResponseSchema,
         },
       },
     },
@@ -108,6 +119,8 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           200: { type: 'object', properties: { data: { type: 'object' } } },
+          404: errorResponseSchema,
+          503: errorResponseSchema,
         },
       },
     },
@@ -167,6 +180,9 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           200: { type: 'object', properties: { data: { type: 'object' } } },
+          400: errorResponseSchema,
+          404: errorResponseSchema,
+          503: errorResponseSchema,
         },
       },
     },
