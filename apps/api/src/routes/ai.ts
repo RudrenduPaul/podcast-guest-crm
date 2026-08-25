@@ -2,7 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { guestService } from '../services/guest.service';
 import { aiService } from '../services/ai.service';
-import { validateRequest, idParamSchema } from '../middleware/validate';
+import { validateRequest } from '../middleware/validate';
 
 const DEMO_SHOW = {
   name: 'The Signal & The Noise',
@@ -28,6 +28,15 @@ const socialPostSchema = z.object({
   podcastUrl: z.string().url().optional(),
 });
 
+const errorResponseSchema = {
+  type: 'object',
+  properties: {
+    error: { type: 'string' },
+    message: { type: 'string' },
+    statusCode: { type: 'number' },
+  },
+} as const;
+
 export async function aiRoutes(server: FastifyInstance): Promise<void> {
   // POST /api/v1/ai/fit-score
   server.post(
@@ -48,6 +57,8 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           200: { type: 'object', properties: { data: { type: 'object' } } },
+          404: errorResponseSchema,
+          503: errorResponseSchema,
         },
       },
     },
@@ -78,7 +89,7 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
 
         return reply.status(200).send({ data: research });
       } catch (error) {
-        server.log.error('AI fit score failed:', error);
+        server.log.error({ err: error }, 'AI fit score failed');
         return reply.status(503).send({
           error: 'AIServiceError',
           message: 'Failed to generate fit score. Please try again.',
@@ -108,6 +119,8 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           200: { type: 'object', properties: { data: { type: 'object' } } },
+          404: errorResponseSchema,
+          503: errorResponseSchema,
         },
       },
     },
@@ -134,7 +147,7 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
 
         return reply.status(200).send({ data: brief });
       } catch (error) {
-        server.log.error('AI interview brief failed:', error);
+        server.log.error({ err: error }, 'AI interview brief failed');
         return reply.status(503).send({
           error: 'AIServiceError',
           message: 'Failed to generate interview brief. Please try again.',
@@ -167,6 +180,9 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
         },
         response: {
           200: { type: 'object', properties: { data: { type: 'object' } } },
+          400: errorResponseSchema,
+          404: errorResponseSchema,
+          503: errorResponseSchema,
         },
       },
     },
@@ -203,7 +219,7 @@ export async function aiRoutes(server: FastifyInstance): Promise<void> {
 
         return reply.status(200).send({ data: posts });
       } catch (error) {
-        server.log.error('AI social post failed:', error);
+        server.log.error({ err: error }, 'AI social post failed');
         return reply.status(503).send({
           error: 'AIServiceError',
           message: 'Failed to generate social posts. Please try again.',

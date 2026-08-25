@@ -9,10 +9,10 @@ export interface GuestListOptions {
   workspaceId: string;
   page?: number;
   limit?: number;
-  stage?: string;
-  priority?: string;
-  search?: string;
-  topics?: string[];
+  stage?: string | undefined;
+  priority?: string | undefined;
+  search?: string | undefined;
+  topics?: string[] | undefined;
 }
 
 export interface GuestListResult {
@@ -28,25 +28,39 @@ export interface CreateGuestInput {
   email: string;
   title: string;
   company: string;
-  bio?: string;
-  avatarUrl?: string;
-  linkedinUrl?: string;
-  twitterHandle?: string;
-  websiteUrl?: string;
-  topics?: string[];
-  priority?: GuestPriority;
-  notes?: string;
+  bio?: string | undefined;
+  avatarUrl?: string | undefined;
+  linkedinUrl?: string | undefined;
+  twitterHandle?: string | undefined;
+  websiteUrl?: string | undefined;
+  topics?: string[] | undefined;
+  priority?: GuestPriority | undefined;
+  notes?: string | undefined;
 }
 
-export interface UpdateGuestInput extends Partial<CreateGuestInput> {
-  fitScore?: number;
-  stage?: GuestLifecycleStage;
-  episodeTitle?: string;
-  episodeNumber?: number;
-  recordingDate?: string;
-  publishedDate?: string;
-  podcastUrl?: string;
-  nextFollowUpDate?: string;
+export interface UpdateGuestInput {
+  name?: string | undefined;
+  email?: string | undefined;
+  title?: string | undefined;
+  company?: string | undefined;
+  bio?: string | undefined;
+  avatarUrl?: string | undefined;
+  linkedinUrl?: string | undefined;
+  twitterHandle?: string | undefined;
+  websiteUrl?: string | undefined;
+  topics?: string[] | undefined;
+  priority?: GuestPriority | undefined;
+  notes?: string | undefined;
+  fitScore?: number | undefined;
+  stage?: GuestLifecycleStage | undefined;
+  episodeTitle?: string | undefined;
+  episodeNumber?: number | undefined;
+  recordingDate?: string | undefined;
+  publishedDate?: string | undefined;
+  podcastUrl?: string | undefined;
+  nextFollowUpDate?: string | undefined;
+  outreachCount?: number | undefined;
+  lastContactedAt?: string | undefined;
 }
 
 // Valid stage transitions (enforces the lifecycle spine)
@@ -151,9 +165,16 @@ export const guestService = {
     const guest = guestStore.get(id);
     if (!guest || guest.workspaceId !== workspaceId) return null;
 
+    // Only apply fields the caller actually provided -- an explicit
+    // `undefined` in UpdateGuestInput means "not provided", not "clear this
+    // field", so it must never overwrite an existing value via spread.
+    const providedFields = Object.fromEntries(
+      Object.entries(input).filter(([, value]) => value !== undefined)
+    );
+
     const updated: Guest = {
       ...guest,
-      ...input,
+      ...providedFields,
       id: guest.id, // Immutable
       workspaceId: guest.workspaceId, // Immutable
       updatedAt: new Date().toISOString(),

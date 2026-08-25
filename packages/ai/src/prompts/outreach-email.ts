@@ -26,10 +26,10 @@ export interface OutreachEmailInput {
   showName: string;
   showDescription: string;
   hostName: string;
-  episodeAngle?: string;
-  recentWork?: string;
-  audienceSize?: string;
-  recentGuests?: string[];
+  episodeAngle?: string | undefined;
+  recentWork?: string | undefined;
+  audienceSize?: string | undefined;
+  recentGuests?: string[] | undefined;
 }
 
 export async function generateOutreachEmail(input: OutreachEmailInput): Promise<OutreachEmailOutput> {

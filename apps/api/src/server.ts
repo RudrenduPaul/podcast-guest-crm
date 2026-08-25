@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+import Fastify, { type FastifyError } from 'fastify';
 import { parseServerEnv } from '@podcast-crm/config';
 import { registerCors } from './plugins/cors';
 import { registerRateLimit } from './plugins/rate-limit';
@@ -13,13 +13,13 @@ import { analyticsRoutes } from './routes/analytics';
 const env = parseServerEnv();
 
 const server = Fastify({
-  logger: {
-    level: env.NODE_ENV === 'production' ? 'warn' : 'info',
-    transport:
-      env.NODE_ENV !== 'production'
-        ? { target: 'pino-pretty', options: { colorize: true } }
-        : undefined,
-  },
+  logger:
+    env.NODE_ENV === 'production'
+      ? { level: 'warn' }
+      : {
+          level: 'info',
+          transport: { target: 'pino-pretty', options: { colorize: true } },
+        },
 });
 
 async function bootstrap(): Promise<void> {
@@ -37,7 +37,7 @@ async function bootstrap(): Promise<void> {
   await server.register(analyticsRoutes, { prefix: '/api/v1' });
 
   // Global error handler
-  server.setErrorHandler((error, _request, reply) => {
+  server.setErrorHandler((error: FastifyError, _request, reply) => {
     server.log.error(error);
 
     if (error.statusCode) {

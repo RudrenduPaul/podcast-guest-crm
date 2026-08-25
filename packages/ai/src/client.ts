@@ -28,7 +28,7 @@ function sleep(ms: number): Promise<void> {
 
 function isRetryableError(error: unknown): boolean {
   if (error instanceof Anthropic.APIError) {
-    return error.status === 429 || error.status >= 500;
+    return error.status === 429 || (error.status !== undefined && error.status >= 500);
   }
   return false;
 }

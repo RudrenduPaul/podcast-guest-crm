@@ -60,7 +60,7 @@ export default function LoginPage() {
             </span>
           </div>
           <p className="text-xs text-slate-600">
-            Credentials are pre-filled. Click "Sign in" to explore the full app with 30+ mock guests across all pipeline stages.
+            Credentials are pre-filled. Click &quot;Sign in&quot; to explore the full app with 30+ mock guests across all pipeline stages.
           </p>
         </motion.div>
 
@@ -162,7 +162,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <p className="text-xs text-slate-600">Podcast Guest CRM · Proprietary Software</p>
+        <p className="text-xs text-slate-600">Podcast Guest CRM · MIT Licensed</p>
       </div>
     </div>
   );

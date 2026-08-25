@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, type ElementType } from 'react';
 import { useRouter } from 'next/navigation';
+import type { Route } from 'next';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
@@ -35,7 +36,12 @@ const PAGES = [
   { label: 'AI Outreach', href: '/dashboard/outreach', icon: Mail, description: 'Draft with Claude' },
   { label: 'Analytics', href: '/dashboard/analytics', icon: BarChart3, description: 'Metrics & charts' },
   { label: 'Settings', href: '/dashboard/settings', icon: Settings, description: 'Workspace config' },
-];
+] as const satisfies ReadonlyArray<{
+  label: string;
+  href: Route;
+  icon: ElementType;
+  description: string;
+}>;
 
 type ResultItem =
   | { kind: 'section'; label: string }
@@ -47,7 +53,7 @@ type ResultItem =
       stage: GuestLifecycleStage;
       avatarUrl?: string;
     }
-  | { kind: 'page'; label: string; href: string; icon: ElementType; description: string }
+  | { kind: 'page'; label: string; href: Route; icon: ElementType; description: string }
   | { kind: 'action'; label: string; description: string; icon: ElementType; action: string };
 
 export function CommandPalette({ open, onClose, onAddGuest }: CommandPaletteProps) {

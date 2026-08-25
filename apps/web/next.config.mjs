@@ -1,5 +1,3 @@
-import type { NextConfig } from 'next';
-
 const securityHeaders = [
   {
     key: 'X-DNS-Prefetch-Control',
@@ -39,7 +37,8 @@ const securityHeaders = [
   },
 ];
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   transpilePackages: ['@podcast-crm/types', '@podcast-crm/config', '@podcast-crm/db'],
   async headers() {
     return [
