@@ -94,4 +94,25 @@ describe('supabase-auth', () => {
     expect(String(url)).toBe('https://project.supabase.co/auth/v1/token?grant_type=refresh_token');
     expect(JSON.parse(init.body)).toEqual({ refresh_token: 'old-refresh' });
   });
+
+  it('rejects a non-https Supabase URL before sending any credential', async () => {
+    await expect(
+      refreshSession('http://attacker.example.com', 'anon-key', 'old-refresh', 'host@show.com')
+    ).rejects.toThrow('must use https');
+    await expect(
+      signInWithPassword('not a url', 'anon-key', 'a@b.com', 'pw')
+    ).rejects.toThrow('Invalid Supabase URL');
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('allows plain http for a localhost Supabase instance', async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => ({ access_token: 'a', refresh_token: 'r', expires_in: 3600 }),
+    });
+    await signInWithPassword('http://localhost:54321', 'anon-key', 'a@b.com', 'pw');
+    const [url] = fetchMock.mock.calls[0];
+    expect(String(url)).toBe('http://localhost:54321/auth/v1/token?grant_type=password');
+  });
 });

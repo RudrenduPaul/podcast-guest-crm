@@ -72,6 +72,22 @@ describe('config (credentials storage)', () => {
     expect(loadCredentials()).toBeNull();
   });
 
+  it('clearCredentials removes the file and tolerates a missing one', async () => {
+    const { saveCredentials, clearCredentials, getCredentialsPath, loadCredentials } = await import('../src/lib/config');
+    saveCredentials({
+      accessToken: 'a',
+      refreshToken: 'r',
+      expiresAt: 9999999999,
+      email: 'host@show.com',
+      supabaseUrl: 'https://project.supabase.co',
+      supabaseAnonKey: 'anon-key',
+    });
+    clearCredentials();
+    expect(existsSync(getCredentialsPath())).toBe(false);
+    expect(loadCredentials()).toBeNull();
+    expect(() => clearCredentials()).not.toThrow();
+  });
+
   it('loadCliConfig falls back to localhost:3001/api/v1 when no env var is set', async () => {
     delete process.env.PODCAST_GUEST_CRM_API_URL;
     const { loadCliConfig } = await import('../src/lib/config');

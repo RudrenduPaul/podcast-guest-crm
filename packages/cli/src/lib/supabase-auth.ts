@@ -29,8 +29,29 @@ interface GoTrueTokenResponse {
 
 export class SupabaseAuthError extends Error {}
 
+const LOOPBACK_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]']);
+
+/**
+ * Parse and validate the Supabase project URL before any credential is sent to it.
+ * Requires https (plain http only for loopback local development) and rebuilds the
+ * request base from the parsed origin, so a tampered or mistyped URL, including one
+ * read back from the cached credentials file, cannot redirect the password or refresh
+ * token to an arbitrary cleartext endpoint.
+ */
 function tokenUrl(supabaseUrl: string): string {
-  return `${supabaseUrl.replace(/\/+$/, '')}/auth/v1/token`;
+  let parsed: URL;
+  try {
+    parsed = new URL(supabaseUrl);
+  } catch {
+    throw new SupabaseAuthError('Invalid Supabase URL.');
+  }
+  const isHttps = parsed.protocol === 'https:';
+  const isLocalHttp = parsed.protocol === 'http:' && LOOPBACK_HOSTS.has(parsed.hostname);
+  if (!isHttps && !isLocalHttp) {
+    throw new SupabaseAuthError('Supabase URL must use https (http is allowed only for localhost).');
+  }
+  const basePath = parsed.pathname.replace(/\/+$/, '');
+  return `${parsed.origin}${basePath}/auth/v1/token`;
 }
 
 async function requestToken(
