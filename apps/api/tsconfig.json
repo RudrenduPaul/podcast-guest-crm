@@ -2,8 +2,9 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "rootDir": "src",
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "esModuleInterop": true
   },
   "include": ["src"],

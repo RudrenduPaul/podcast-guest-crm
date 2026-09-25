@@ -8,13 +8,13 @@
     "migrate": "drizzle-kit migrate"
   },
   "dependencies": {
-    "drizzle-orm": "^0.45.2",
-    "better-sqlite3": "^9.4.0",
-    "@podcast-crm/types": "workspace:*"
+    "@podcast-crm/types": "workspace:*",
+    "better-sqlite3": "^12.11.1",
+    "drizzle-orm": "^0.45.3"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.10",
-    "@types/better-sqlite3": "^7.6.0",
-    "typescript": "^5.4.0"
+    "@types/better-sqlite3": "^9.6.0",
+    "drizzle-kit": "^0.31.11",
+    "typescript": "^6.0.3"
   }
 }

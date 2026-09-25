@@ -12,7 +12,7 @@ export interface ValidationTarget<
 }
 
 export function formatZodError(error: ZodError): string {
-  return error.errors
+  return error.issues
     .map((e) => `${e.path.join('.')}: ${e.message}`)
     .join(', ');
 }
@@ -58,7 +58,7 @@ export async function validateRequest<
         error: 'ValidationError',
         message: formatZodError(error),
         statusCode: 400,
-        details: error.errors,
+        details: error.issues,
       });
       return null;
     }

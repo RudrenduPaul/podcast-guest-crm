@@ -19,7 +19,7 @@
     "dev": "tsx src/index.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint src"
   },
   "keywords": [
     "podcast",
@@ -50,18 +50,19 @@
     "node": ">=20"
   },
   "dependencies": {
-    "commander": "^12.1.0",
-    "@modelcontextprotocol/sdk": "^1.30.0",
-    "zod": "^3.22.0"
+    "@modelcontextprotocol/sdk": "^1.30.1",
+    "commander": "^14.0.3",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "tsup": "^8.0.2",
-    "tsx": "^4.7.0",
-    "typescript": "^5.4.0",
-    "vitest": "^4.1.11",
-    "@types/node": "^20.0.0",
-    "eslint": "^8.57.0",
-    "@typescript-eslint/parser": "^8.64.0",
-    "@typescript-eslint/eslint-plugin": "^8.64.0"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^20.19.43",
+    "@typescript-eslint/eslint-plugin": "^8.70.1",
+    "@typescript-eslint/parser": "^8.70.1",
+    "eslint": "^10.11.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.11"
   }
 }
