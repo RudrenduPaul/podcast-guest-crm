@@ -19,7 +19,7 @@
     "@podcast-crm/config": "workspace:*",
     "@podcast-crm/db": "workspace:*",
     "@podcast-crm/types": "workspace:*",
-    "fastify": "^5.12.5",
+    "fastify": "^5.12.6",
     "zod": "^4.6.5"
   },
   "devDependencies": {
